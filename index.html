@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="Tone.js"></script>
+    <style>
+        body {
+            background-color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            position: absolute;
+            height: 200px;
+            border: 5px solid black;
+            display: flex;
+        }
+
+        .key {
+            border: 1px solid black;
+            transition: transform 0.1s;
+        }
+
+        .whitenote {
+            height: 100%;
+            width: 50px;
+            float: left;
+            background: white;
+            position: relative;
+            
+        }
+        
+        .blacknote {
+            position: absolute;
+            height: 65%;
+            width: 55%;
+            z-index: 1;
+            left: 68%;
+            background: #777;
+
+        }
+
+        .key.active {
+            transform: scale(0.95);
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id='container'>
+    </div>
+    <script>
+        var synth = new Tone.PolySynth().toMaster();
+        var notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+        var html = '';
+
+        for (var octave = 0; octave < 2; octave++) {
+            for (var i = 0; i < notes.length; i++) {
+                var hasSharp = true;
+                var note = notes[i];
+
+                if (note == 'E' || note == 'B')
+                    hasSharp = false;
+                html += `<div class='key whitenote' onmousedown='noteDown(this, false)' onmouseup='noteUp(this,false)' onmouseleave='noteUp(this,false)' data-note='${note + (octave + 4)}'>`;
+
+                if (hasSharp) {
+                    html += `<div class='key blacknote' onmousedown='noteDown(this, true)' onmouseup='noteUp(this, true)' onmouseleave='noteUp(this,true)' data-note='${note + '#' + (octave + 4)}'></div>`;
+                }
+                html += `</div>`;
+            }
+        }
+
+        document.getElementById('container').innerHTML = html;
+
+        function noteUp(elem, isSharp) {
+            event.stopPropagation();
+            elem.style.background = isSharp ? '#777' : '';
+            elem.classList.remove('active');
+        }
+
+        function noteDown(elem, isSharp) {
+            event.stopPropagation();
+            var note = elem.dataset.note;
+            elem.classList.add('active');
+            elem.style.background = isSharp ? 'black' : '#ccc';
+            synth.triggerAttackRelease(note, "16n");
+        }
+    </script>
+</body>
+
+</html>
