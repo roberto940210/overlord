@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Webpage within a Webpage</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>MyDrive</title>
 </head>
 <body>
-    <h1>My Main Webpage</h1>
-    <p>This is my main webpage. The webpage below is opened within this main webpage.</p>
-    <iframe id="myIframe" width="100%" height="500px">
+    <iframe src="https://www.blender.org/">
         <p>Your browser does not support iframes.</p>
     </iframe>
-
-    <script>
-    $(document).ready(function(){
-        $.getJSON("gg.json", function(data){
-            document.getElementById('myIframe').src = data.url;
-        });
-    });
-    </script>
 </body>
 </html>
