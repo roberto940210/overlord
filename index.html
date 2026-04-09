@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BIOFARMEX BODEGA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <style type="text/css">
+			.w3-merriweather {
+			  font-family: "Merriweather", serif;
+			}
+			#loader {
+			  position: absolute;
+			  left: 50%;
+			  top: 50%;
+			  z-index: 1;
+			  width: 120px;
+			  height: 120px;
+			  margin: -76px 0 0 -76px;
+			  border: 16px solid #f3f3f3;
+			  border-radius: 50%;
+			  border-top: 16px solid #000000;
+			  -webkit-animation: spin 2s linear infinite;
+			  animation: spin 2s linear infinite;
+			}
+
+			@-webkit-keyframes spin {
+			  0% { -webkit-transform: rotate(0deg); }
+			  100% { -webkit-transform: rotate(360deg); }
+			}
+			.notSelTxt{
+			  -webkit-user-select: none; /* Safari */
+			  -ms-user-select: none; /* IE 10 and IE 11 */
+			  user-select: none; /* Standard syntax */
+			}
+			@keyframes spin {
+			  0% { transform: rotate(0deg); }
+			  100% { transform: rotate(360deg); }
+			}
+			.bar-search {
+			  outline: none !important;
+			  padding: 7px 7px 9px 7px;
+			  color: #333;
+			  font-size: 16px;
+			  height: 39px;
+			  margin-top: 10px;
+			}
+			.bar-height{
+			  height: 60px;
+			}
+			.bar-logo{
+			  margin-top: 5px;
+			  height: 50px;
+			  width: 50px;
+			}
+			.bar-cart{
+			  padding-top: 20px;
+			  padding-left: 5%;
+			  width:30%;
+			}
+			.bar-neg{
+			  overflow: hidden;
+			  width:300px;
+			   text-overflow: ellipsis;
+			   display: -webkit-box;
+			   -webkit-line-clamp: 2;
+			   -webkit-box-orient: vertical;
+			   line-height: normal;
+			}
+
+			.bar-neg-sub{
+			  display: none;
+			}
+			.cnt-ctr-lar{
+			  margin-top: 100px;
+			}
+			.cnt-ctr-sml{
+
+			    display: none;
+			    background: #FFF;
+			}
+
+			.thbGrd{
+			  max-width: 98%;
+			  max-height: 98%;
+			  font-size: 140px;
+			}
+
+			.inpDraLef{
+			  position: absolute;
+			  margin-top: 10px;
+			  margin-left: 5px;
+			}
+
+			.btnWhts{
+			  padding: 5px;
+			  position:fixed;
+			  width:60px;
+			  height:60px;
+			  bottom:40px;
+			  right:40px;
+			  background-color:#25d366;
+			  color:#FFF;
+			  border-radius:50px;
+			  text-align:center;
+			  font-size:30px;
+			  box-shadow: 2px 2px 3px #999;
+			  z-index:100;
+			}
+			.ctnItm{
+			  min-height: 800px;
+			}
+			.ctnCtgDro{
+			  max-height: 300px;
+			  overflow: auto;
+			  width: 250px;
+			}
+			.ctnSrtDro{
+			  width: 180px;
+			}
+			.fxd{
+			  position: fixed;
+			  top:0;
+			  left:0;
+			  width: 100%;
+			  z-index: 1000;
+			}
+			.mrgItm{
+			  margin-left: 8%;
+			  margin-right: 8%;
+			}
+			.pointer{
+				cursor: pointer;
+			}
+			.btnPag{
+				color: #1A73E8;
+				border: none;
+				background: transparent;
+			}
+			.pagCur{
+				padding-top: 5px;
+				padding-bottom: 5px;
+				padding-left: 12px;
+				padding-right: 12px;
+				background: #0000000C;
+				font-weight: bold;
+			}
+			.spc50{
+				margin-top: 50px;
+			}
+			.inNum{
+			  	width: 90px;
+			  	text-align: center;
+			 }
+
+			@media screen and (max-width: 1200px) {
+			  .bar-cart{
+			    padding-top: 20px;
+			    padding-left: 3%;
+			    width:20%;
+			  }
+			  .mrgItm{
+			    margin-left: 4%;
+			    margin-right: 4%;
+			  }
+			}
+
+			@media screen and (max-width: 760px) {
+			  .bar-neg{
+			    display: none;
+			  }
+			  .bar-cart{
+			    padding-left: 16px;
+			    width:80px;
+			  }
+
+
+			  .bar-neg-sub{
+			    display: block;
+			  }
+			  .content-cat{
+			    display: none;
+			  }
+			  .cnt-ctr-lar{
+			    display: none;
+			  }
+			  .cnt-ctr-sml{
+			    display: block;
+			    background: #FFF;
+			  }
+
+			  .ctnItm{
+			    min-height: 400px;
+			  }
+			  .mrgItm{
+			    margin-left: 2%;
+			    margin-right: 2%;
+			  }
+			  .btnPag{
+				color: #1A73E8;
+				border: none;
+				background: transparent;
+				font-size: 11px;
+			  }
+			  .spc50{
+				margin-top: 25px;
+			  }
+			  .inNum{
+			  	width: 60px;
+			  	text-align: center;
+			  }
+
+			}
+
+		</style>
+
+
+    </head>
+    <body ng-app='app' style="background-color: #ebebeb;" ng-controller='ctrMan' ng-cloack>
+
+        <div id="loader"></div>
+        <div id="ctnMan" style="visibility: hidden;">
+            <div class="w3-row {{clt}} fxd" >
+                <div class="w3-col w3-left w3-container bar-height" style="width:80px">
+                    <img id="lg" src="logo.jpg" class="w3-round bar-logo" alt="">
+                </div>
+                <div class="w3-col w3-left w3-container bar-height bar-neg">
+                    <h4 id="labNeg"  class="w3-merriweather" style="font-weight: bold; line-height: 22px;margin: 5px 0px; line-height: 25px; visibility: hidden;" ng-model="ngc">{{ngc}}</h4>
+                </div>
+                <div class="w3-col w3-right w3-center bar-height bar-cart" >
+                    <div ng-hide='!crt'>
+                        <i class="fa fa-shopping-cart  w3-xlarge pointer w3-left" ng-click='myCrt()' ></i>
+                        <span id="bdgCrt" class="w3-badge w3-red w3-small w3-left" style="margin-top:-5px;margin-left: 1px;">0</span>
+                    </div>
+
+                </div>
+                <div class="w3-rest bar-height">
+                    <input class="w3-input w3-border w3-round bar-search w3-merriweather" placeholder="{{txtBsc+'...'}}" type="text" maxlength="30" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off" ng-model="srch" ng-init="srch=''" ng-Keyup="configPages()">
+                </div>
+            </div>
+            <div class="w3-container w3-merriweather w3-center {{clt}}  bar-neg-sub" style="margin-top:60px;" ng-model="ngc">
+                <h3 ng-hide="ngc.length>15">{{ngc}}</h3><h5 ng-hide="ngc.length<16">{{ngc}}</h5>
+            </div>
+
+
+            <div class="w3-row cnt-ctr-sml w3-merriweather w3-card">
+                <div class="w3-container w3-col s5 w3-center" >
+                    <div onclick="document.getElementById('modCtg').style.display='block'" ng-hide="ctgs.length<2">
+                        <h4 class="notSelTxt" style="color: {{cblu}};">{{txtCtg}}</h4>
+                    </div>
+
+
+
+                </div>
+                <div class="w3-container w3-col s2 w3-center"><h4 style="color: #00000021;">|</h4></div>
+                <div class="w3-container w3-col s5 w3-center" onclick="document.getElementById('modSrt').style.display='block'">
+                    <h4 class="notSelTxt" style="color: {{cblu}};">{{txtSrt}}</h4>
+                </div>
+            </div>
+
+            <div class="w3-container cnt-ctr-lar">
+
+                <div class="w3-left w3-merriweather" style="margin-left:50px;" ng-hide="ctgs.length<2">
+                    {{txtCtg}}
+                    <div class="w3-dropdown-hover w3-merriweather">
+                        <button class="w3-button {{clt}}" style="width:250px">{{txtCtgCrt}}</button>
+                        <div class="w3-dropdown-content w3-bar-block ctnCtgDro {{clt}}" >
+                            <a href="" class="w3-bar-item w3-button" ng-repeat='ctg in ctgs' ng-click='selCtg(ctg)'>{{ctg.n}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="w3-right w3-merriweather" style="margin-right:50px;">
+                    {{txtSrt}}
+                    <div class="w3-dropdown-hover w3-merriweather">
+                        <button class="w3-button {{clt}}" style="width:180px">{{txtSrtCrt}}</button>
+                        <div class="w3-dropdown-content w3-bar-block ctnSrtDro {{clt}}">
+                            <a href="" class="w3-bar-item w3-button" ng-click="selSrt(0)">{{txtAlf}}</a>
+                            <a href="" class="w3-bar-item w3-button" ng-click="selSrt(1)">{{txtMyp}}</a>
+                            <a href="" class="w3-bar-item w3-button" ng-click="selSrt(2)">{{txtMnp}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="w3-container spc50" >
+
+                <div ng-init='configPages()'  class="w3-row-padding ctnItm">
+                    <div class="w3-col s12 m6 l4" ng-repeat='itm in itmsCur | orderBy:sort| startFromGrid: currentPage * pageSize | limitTo: pageSize '>
+                        <div class="w3-panel w3-card w3-white mrgItm w3-merriweather">
+                            <div ng-hide="!img"  class="w3-container w3-margin-bottom w3-center" style="height: 260px">
+                                <img ng-hide="{{itm.l=='null'?true:false}}" src="{{itm.l+'.jpg'}}" class="w3-round thbGrd" onload="ajIm(this)">
+                                <i ng-hide="{{itm.l=='null'?false:true}}" class="fa fa-image w3-round thbGrd" style="margin-top:60px;"></i>
+
+                            </div>
+                            <div class="w3-margin-top w3-margin-bottom w3-border-bottom"></div>
+                            <p class="w3-small" style="line-height: 0.7;" ng-hide="cla">{{itm.k}}</p>
+                            <p class="w3-small" style="line-height: 0.7;" ng-hide="uni">{{itm.u}}</p>
+                            <p style="line-height: 1.1; height: 35px;">{{itm.d}}</p>
+
+                            <div class="w3-row w3-center w3-margin-top w3-margin-bottom" style="height:40px;">
+                                <div class="w3-col w3-right" style="width:60px">
+
+                                    <i class="fa fa-cart-plus w3-xxlarge pointer" ng-click='addCrt($event.currentTarget,itm)'  style="color: {{cblu}};" ng-hide='!crt'></i>
+                                </div>
+                                <div class="w3-rest w3-center">
+                                    <label ng-class="{'w3-large':itm.p.length>12,'w3-xlarge':itm.p.length<=12}">{{itm.p}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='btn-group w3-center spc50'>
+                    <button type='button' class='w3-merriweather btnPag pointer' ng-hide='currentPage == 0' ng-click='ntr()'>< {{txtPrv}}</button>
+                    <label class="w3-merriweather w3-large w3-margin-left pagCur">{{currentPage+1}}</label><label class="w3-merriweather w3-large w3-margin-right">{{' / '+ pages.length }}</label>
+                    <button type='button' class='w3-merriweather btnPag pointer' ng-hide='currentPage >= itmsCur.length/pageSize - 1' , ng-click='nxt()'>{{txtNxt}} ></button>
+                </div>
+
+            </div>
+
+            <br><br><br>
+            <footer class="w3-container w3-padding-32 spc50 {{clt}}">
+                <div class="w3-row-padding w3-center">
+                    <div class="{{ txtInf==null||txtInf==''?'':'w3-half' }}" ng-hide="txtTel==null||txtTel==''?true:false">
+                        <div class="w3-container" id="contact">
+                            <h4 class="w3-merriweather">{{ngc}}</h4>
+                            <a href="tel:{{txtTel}}" ><i class="fa fa-phone"></i>{{txtTel}}</a><br>
+                            <a class="w3-margin-top" href="mailto:{{txtCor}}" ng-hide="txtCor==''||txtCor==null?true:false"><i class="fa fa-envelope"></i>{{txtCor}}</a>
+                        </div>
+                    </div>
+
+                    <div class="{{ txtTel==null||txtTel==''?'':'w3-half' }}" ng-hide="txtInf==null||txtInf==''?true:false">
+                        <p id="textInf" ></p>
+                    </div>
+
+
+                </div>
+                <div style="height:90px" ng-hide="!wat"></div>
+            </footer>
+            <a ng-hide="!wat" href="https://api.whatsapp.com/send?phone={{txtTel+'&text=%20'}}" class="btnWhts" target="_blank">
+                <i class="fa fa-whatsapp w3-xxxlarge"></i>
+            </a>
+
+
+            <div id="modCrt" class="w3-modal" style="padding-top:30px;z-index: 3000;">
+                <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;overflow: auto; height: 90%;">
+
+                    <div class="w3-center"><br>
+                        <span onclick="document.getElementById('modCrt').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">{{clo}} &times;</span>
+                    </div>
+                    <form class="w3-container w3-margin-top" ng-submit="snd()">
+                        <div class="w3-section">
+                            <div class="w3-padding-small">
+                                <i class="fa fa-user w3-xlarge inpDraLef"></i><input class="w3-input w3-border" style="padding-left: 35px;" placeholder="{{txtPlaNam}}" type="text" ng-model="namc" required>
+                            </div>
+
+                            <input class="w3-button w3-block w3-section w3-padding w3-margin-top w3-merriweather {{clt}}" type="submit" value="{{txtSct}}"  ng-hide="btc">
+                            <div class="w3-center" ng-hide="lod"><i class="fa fa-spinner w3-jumbo w3-spin"></i></div>
+                            <p ng-hide="itmsCrt.itms.length>0?true:false"  class="w3-display-middle">{{txtSin}}</p>
+                            <div class="w3-row w3-border-bottom w3-padding-16" ng-repeat='itm in itmsCrt.itms'>
+                                <div ng-hide="!img"  class="w3-col s3 m2 l2 w3-center">
+                                    <img ng-hide="{{itm.l=='null'?true:false}}" src="{{itm.l+'.jpg'}}" class="w3-round" style="width:90%;">
+
+                                    <i ng-hide="{{itm.l=='null'?false:true}}" class="fa fa-image w3-jumbo w3-round" style="width:90%;"></i>
+
+                                </div>
+                                <div class="w3-col s9 m10 l10">
+                                    <span class="w3-margin-left w3-merriweather" ng-hide="cla">{{itm.k}}</span><br>
+                                    <span class="w3-margin-left w3-merriweather" ng-hide="uni">{{itm.u}}</span><br>
+                                    <span class="w3-margin-left w3-merriweather">{{itm.d}}</span>
+                                    <div class="w3-row">
+                                        <div class="w3-col s2 m5 l5 w3-text-red">
+                                            <i class="fa fa-trash w3-xlarge w3-right" style="margin-top: 5px;" ng-click='delItmCrt(itm)'></i>
+                                        </div>
+                                        <div class="w3-col s10 m7 l7 ">
+                                            <i class="fa fa-plus-circle w3-xlarge w3-margin-right w3-right" ng-click='itm.q=itm.q+1' style="margin-top: 5px;"></i>
+
+                                            <span class="w3-margin-left w3-margin-right w3-xlarge w3-right"><input class="inNum" type="text" ng-model="itm.q" ></span>
+                                            <i class="fa fa-minus-circle w3-xlarge w3-right" ng-click='itm.q=itm.q-1<0?itm.q:itm.q-1' style="margin-top: 5px;"></i>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <div id="modSrt" class="w3-modal" style="z-index: 3000;">
+                <div class="w3-modal-content w3-card-4">
+                    <header class="w3-container {{clt}}">
+                        <span onclick="document.getElementById('modSrt').style.display='none'"
+                                class="w3-button w3-display-topright">&times;</span>
+                        <h2>{{txtSrt}}</h2>
+                    </header>
+                    <div class="w3-container">
+                        <ul class="w3-ul w3-border-bottom">
+                            <li class="w3-container notSelTxt" ng-click="selSrt(0)">{{txtAlf}}</li>
+                            <li class="w3-container notSelTxt" ng-click="selSrt(1)">{{txtMyp}}</li>
+                            <li class="w3-container notSelTxt" ng-click="selSrt(2)">{{txtMnp}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modCtg" class="w3-modal" style="z-index: 3000;">
+                <div class="w3-modal-content w3-card-4">
+                    <header class="w3-container {{clt}}">
+                        <span onclick="document.getElementById('modCtg').style.display='none'"
+                                class="w3-button w3-display-topright">&times;</span>
+                        <h2>{{txtCtg}}</h2>
+                    </header>
+                    <div class="w3-container" style="overflow: auto; max-height: 320px;">
+                        <ul class="w3-ul w3-monospace" ng-repeat='ctg in ctgs'>
+                            <li class="w3-border-bottom w3-container" ng-click='selCtg(ctg)'>{{ctg.n}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <script type="text/javascript">
+
+			angular.module('app', [])
+			  .controller('ctrMan',
+			    function($scope) {
+			      var modCtg = document.getElementById('modCtg');
+			      var modSrt = document.getElementById('modSrt');
+			      var modCrt = document.getElementById('modCrt');
+			      var bdgCrt = document.getElementById("bdgCrt");
+			      window.onclick = function(event) {
+			        if (event.target == modCtg) {
+			          modCtg.style.display = "none";
+			        }else if(event.target == modSrt){
+			          modSrt.style.display = "none";
+			        }
+			        else if(event.target == modCrt){
+			          modCrt.style.display = "none";
+			        }
+			      }
+			      $scope.currentPage = 0;
+			      $scope.pagSiz = 0;
+			      $scope.pageSize = 6;
+			      $scope.pages = [];
+			      $scope.itms = [];
+			      $scope.itmsCur = [];
+			      $scope.ctgs = [];
+			      $scope.itmsCrt = [];
+			      $scope.txtSrt = '...';
+			      $scope.txtCtg = '...';
+			      $scope.txtAlf = '...';
+			      $scope.txtMay = '...';
+			      $scope.txtMen = '...';
+			      $scope.txtNxt = '...';
+			      $scope.txtPrv = '...';
+			      $scope.txtSrtCrt = $scope.txtAlf;
+			      $scope.sort = 'd';
+			      $scope.ctg = '';
+			      $scope.txtTel='';
+			      $scope.txtCor='';
+			      $scope.txtInf='';
+			      $scope.txtSct='';
+			      $scope.txtPlaNam='';
+			      $scope.txtSct='';
+			      $scope.txtSin='';
+			      $scope.uni = false;
+			      $scope.cla = false;
+			      $scope.wat = false;
+			      $scope.crt = false;
+			      $scope.lod = true;
+			      $scope.btc = false;
+			      $scope.img = true;
+			      $scope.ctok='';
+			      $scope.ernw='';
+			      $scope.clt = 'w3-black';
+			      $scope.cblu = '#1A73E8';
+			      $scope.cgre = '#33AA66';
+			      $scope.clo = 'close';
+
+				  $scope.configPages = function() {
+				  		var q = $scope.srch;
+				  		try{
+				  			q = $scope.srch.replace(" ","");
+				  		}catch(e){
+
+				  		}
+				        if($scope.ctg=='' && q=='' ){
+				            $scope.itmsCur = $scope.itms;
+				        }else{
+
+				        	if(q != ''){
+				        		$scope.txtCtgCrt = $scope.ctgs[0].n;
+				        		$scope.ctg = 0;
+				        		$scope.currentPage = 0;
+				        	}
+				            $scope.itmsCur = [];
+				            try{
+				            	$scope.itms.forEach( function(val, ind, arr) {
+
+					                var ax = q==""?true:(val.d.toUpperCase().search(q.toUpperCase() ) > -1  );
+
+					                if( ($scope.ctg=='' || val.c==$scope.ctg) && ax ){
+					                    $scope.itmsCur.push(val);
+					                }
+					            });
+				            }catch(e){
+
+				            }
+				        }
+				        var intRef = 20;
+				        $scope.pages.length = 0;
+				        var ini = $scope.currentPage - 4;
+				        var fin = $scope.currentPage + 5;
+				        if (ini < 1) {
+				          ini = 1;
+				          fin = Math.ceil($scope.itmsCur.length / $scope.pageSize);
+				        } else {
+				            ini = -1;
+				            fin = Math.ceil($scope.itmsCur.length / $scope.pageSize);
+				        }
+				        if (ini < 1) ini = 1;
+				        for (var i = ini; i <= fin; i++) {
+				          $scope.pages.push({
+				            no: i
+				          });
+				        }
+				        if ($scope.currentPage >= $scope.pages.length)
+				          $scope.currentPage = $scope.pages.length;
+				      };
+
+
+
+			      $scope.setPage = function(index) {
+			        $scope.currentPage = index - 1;
+			      };
+
+			      $scope.nxt = function() {
+			        $scope.currentPage = $scope.currentPage + 1;
+			        topScr();
+			      };
+			      $scope.ntr = function() {
+			      	$scope.currentPage = $scope.currentPage - 1;
+			        topScr();
+			      };
+
+
+			      $scope.addCrt = function(e,itm){
+			        e.setAttribute('class','fa fa-check-circle w3-xxlarge pointer');
+			        e.style.color = $scope.cgre;
+				    addItmCrt(itm);
+				    setTimeout(function () {
+				      e.setAttribute('class','fa fa-cart-plus w3-xxlarge pointer');
+				      e.style.color = $scope.cblu;
+				    }, 600);
+
+
+			      }
+
+			      $scope.myCrt = function(){
+			        modCrt.style.display='block';
+			        $scope.itmsCrt = getStg();
+			      }
+			      $scope.delItmCrt = function(itm){
+			        $scope.itmsCrt = delItmCrt(itm);
+			      }
+			      $scope.selSrt = function(sel){
+			        switch(sel) {
+			          case 0:
+			            $scope.txtSrtCrt = $scope.txtAlf;
+			            $scope.sort = 'd';
+			            break;
+			          case 1:
+			            $scope.txtSrtCrt = $scope.txtMyp;
+			            $scope.sort = '-v';
+			            break;
+			          case 2:
+			            $scope.txtSrtCrt = $scope.txtMnp;
+			            $scope.sort = 'v';
+			            break;
+			        }
+			        modSrt.style.display = "none";
+			      }
+			      $scope.selCtg = function(ctg){
+
+			        $scope.txtCtgCrt = ctg.n;
+			        $scope.ctg = ctg.i==0?'':ctg.i;
+			        modCtg.style.display = "none";
+			        $scope.currentPage = 0;
+			        $scope.srch = '';
+			        $scope.configPages();
+			      }
+			      $scope.srchAll = function(){
+			        console.log("mycart: "+$scope.srch);
+
+			      }
+			      $scope.snd = function(){
+
+			        var text = $scope.txtPlaNam+": "+$scope.namc+"\n\n";
+			        var suc = true;
+
+			        $scope.itmsCrt.itms.forEach( function(v, i, ar) {
+
+			        	if( !(!isNaN(v.q) && !isNaN(parseFloat(v.q) ) ) ){
+			        		suc = false;
+			        		return;
+			        	}
+
+			            text += "*"+v.q+" -> "+v.d+" :"+v.k+"\n";
+			        });
+
+			        if(suc){
+			        	setStg({});
+			            $scope.itmsCrt = [];
+			            bdgCrt.style.visibility = "hidden";
+			            modCrt.style.display = "none";
+
+				        window.open(
+				          encodeURI('https://api.whatsapp.com/send?phone='+$scope.txtTel+'&text='+text),
+				          '_blank'
+				        );
+			        }else{
+			        	alert("only numeric values");
+			        }
+
+
+			      }
+			      addItmCrt(null);
+			      var unts = {};
+			      var result = data;
+
+
+			        var ctnMan = document.getElementById("ctnMan");
+			        ctnMan.style.visibility = "visible";
+			        var loader = document.getElementById("loader");
+			        loader.style.visibility = "hidden";
+			        var lg_v = document.getElementById("lg");
+			        var ngc = result.ngc;
+
+
+			        $scope.txtSrt = result.orp;
+			        $scope.txtCtg = result.ctgs;
+			        $scope.txtAlf = result.alf;
+			        $scope.txtMyp = result.myp;
+			        $scope.txtMnp = result.mnp;
+			        $scope.txtBsc = result.bsc;
+			        $scope.txtNxt = result.nxt;
+			      	$scope.txtPrv = result.prv;
+			        $scope.ctok = result.ctok;
+			        $scope.ernw = result.ernw;
+
+			        $scope.txtTel = result.tel2;
+			        $scope.txtCor = result.cor2;
+			        $scope.txtInf = result.dir2;
+
+			        $scope.img = result.img;
+
+			        $scope.uni = !result.uni;
+			        $scope.cla = !result.cla;
+			        $scope.clo = result.clo;
+
+
+			        $scope.wat = result.wha&&result.tel2!='';
+			        $scope.crt = result.crt&&result.tel2!='';
+			        $scope.txtSct = result.sct;
+			        $scope.txtPlaNam = result.nam;
+
+			        $scope.txtSin = result.sin;
+
+			        $scope.txtSct = result.sct;
+			        $scope.txtSrtCrt = $scope.txtAlf;
+
+			        $scope.clt = result.clt;
+			        $scope.ngc = ngc;
+
+
+			        if(result.lg.length>0){
+			          $scope.lg = result.lg;
+			        }else{
+			          lg_v.style.visibility = "hidden";
+			          $scope.lg = "0=="
+			        }
+
+			        result.und.forEach( function(val, ind, arr) {
+			            unts[val.i] = val.n;
+			        });
+
+
+			        $scope.itms = result.itm;
+			        $scope.ctgs = result.ctg;
+			        $scope.txtCtgCrt = $scope.ctgs[0].n;
+
+
+			        $scope.itms.forEach( function(val, ind, arr) {
+			            val.u = unts[val.u];
+
+			        });
+
+
+
+			        var link = document.createElement('link');
+			        link.rel = 'icon';
+			        document.getElementsByTagName('head')[0].appendChild(link);
+			        link.href = 'logo.png';
+			        $scope.currentPage = 1;
+			        $scope.configPages();
+			        topScr();
+					setTimeout(function () {
+				      	var el = document.getElementById('labNeg');
+					   	var divHeight = el.offsetHeight
+					   	var lineHeight = parseInt(el.style.lineHeight);
+					   	var lines = divHeight / lineHeight;
+	    				if( lines < 2){
+	    					el.style.lineHeight = "50px";
+	    				}
+	    				if($scope.ngc.length>25){
+							el.style.fontSize = "16px";
+	    				}
+	    				if($scope.ngc.length>40){
+							el.style.fontSize = "14px";
+	    				}
+	    				el.style.visibility = "visible";
+				    }, 400);
+			    })
+			.filter('startFromGrid', function() {
+			  return function(input, start) {
+			    start = +start;
+			    return input.slice(start);
+			  }
+			});
+			var stgLoc={};
+            function stgChk(){
+                var test = 'test';
+                try {
+                    localStorage.setItem(test, test);
+                    localStorage.removeItem(test);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+            function getStg(){
+                if( stgChk() ){
+                  var itmsAux = localStorage.getItem("mn_shop_13x");
+                  return itmsAux==null?{}:JSON.parse(itmsAux);
+                }else{
+                  return stgLoc;
+                }
+            }
+            function setStg(itms){
+                if( stgChk() ){
+                  localStorage.setItem("mn_shop_13x", JSON.stringify(itms) );
+                }else{
+                  stgLoc = itms;
+                }
+            }
+			function addItmCrt(itm){
+			    var itmsCrt = getStg();
+			    if(itmsCrt.itms==undefined){
+			        itmsCrt.itms = [];
+			        if(itm!=null){
+			          itm.q = 1;
+			          itmsCrt.itms.push(itm);
+			        }
+			      }else if(itm!=null){
+			          var aux = null;
+			          for(var i=0;i<itmsCrt.itms.length;i++){
+			            if(itmsCrt.itms[i].i==itm.i){
+			                aux=itmsCrt.itms[i];
+			                break;
+			              }
+			          }
+			          if(aux==null){
+			            itm.q = 1;
+			            itmsCrt.itms.push(itm);
+			          }else{
+			            aux.q +=1;
+			          }
+
+			      }
+			    setStg(itmsCrt);
+			    bdgCrt.innerHTML = itmsCrt.itms.length;
+			    bdgCrt.style.visibility = itmsCrt.itms.length==0? "hidden":"visible";
+
+			}
+			function delItmCrt(itm){
+			    var itmsCrt = getStg();
+			    var ind = -1;
+			    for(var i=0;i<itmsCrt.itms.length;i++){
+			      if(itmsCrt.itms[i].i==itm.i){
+			          ind=i;
+			          break;
+			        }
+			    }
+			    if(ind>-1){
+			      itmsCrt.itms.splice(ind, 1);
+			    }
+			    setStg(itmsCrt);
+			    bdgCrt.innerHTML = itmsCrt.itms.length;
+			    bdgCrt.style.visibility = itmsCrt.itms.length==0? "hidden":"visible";
+			    return itmsCrt;
+			}
+			function topScr() {
+			  document.body.scrollTop = 0;
+			  document.documentElement.scrollTop = 0;
+			}
+			function ajIm(el){
+				el.style.marginTop = ((260-el.offsetHeight)/2)+"px";
+			}
+			var data = /*#d4t4#*/ {"itm":[{"c":0,"d":"PIEZA AEROZAN - 30 TAB","i":"1","k":"1","l":"1","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 100  - 1 LT","i":"4","k":"4","l":"4","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 100 - 100 ML","i":"2","k":"2","l":"2","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 100 - 250 ML","i":"3","k":"3","l":"3","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 100 - 5 LT","i":"479","k":"479","l":"null","p":"$3,478.75","u":10,"v":3478.75,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 250 FORTE - 1 LT","i":"7","k":"7","l":"7","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 250 FORTE - 100 ML","i":"5","k":"5","l":"5","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 250 FORTE - 250 ML","i":"6","k":"6","l":"6","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ALBENDABIO 250 FORTE - 5 LT","i":"8","k":"8","l":"8","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA AMINOL-DL 34X - 250 ML","i":"513","k":"513","l":"null","p":"$715","u":10,"v":715,"z":200},{"c":0,"d":"PIEZA AMINOLITOS VIT - 250 ML","i":"507","k":"507","l":"null","p":"$151.8","u":10,"v":151.8000030517578,"z":200},{"c":0,"d":"PIEZA AMINOLITOS VIT - 500 ML","i":"9","k":"9","l":"9","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA AMINOVIDA PUPPY - 12X30 ML","i":"10","k":"10","l":"10","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150  - 100 ML","i":"12","k":"12","l":"12","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150 - 20 ML","i":"11","k":"11","l":"11","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150 - 250 ML","i":"389","k":"389","l":"null","p":"$565.78","u":10,"v":565.7849731445312,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150 FORTE - 100 ML","i":"14","k":"14","l":"null","p":"$311.18","u":10,"v":311.1789855957031,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150 FORTE - 20 ML","i":"13","k":"13","l":"null","p":"$107.19","u":10,"v":107.19499969482422,"z":200},{"c":0,"d":"PIEZA AMOXIBIO 150 FORTE - 250 ML","i":"15","k":"15","l":"null","p":"$622.37","u":10,"v":622.3690185546875,"z":200},{"c":0,"d":"PIEZA AMOXICIL - 30 TAB","i":"16","k":"16","l":"null","p":"$188.34","u":10,"v":188.3419952392578,"z":200},{"c":0,"d":"PIEZA AMOXIGEN  - 100 ML","i":"18","k":"18","l":"null","p":"$339.02","u":10,"v":339.0199890136719,"z":200},{"c":0,"d":"PIEZA AMOXIGEN  - 20 ML","i":"17","k":"17","l":"null","p":"$129.54","u":10,"v":129.53599548339844,"z":200},{"c":0,"d":"PIEZA AMOXIGEN  - 250 ML","i":"19","k":"19","l":"null","p":"$648.57","u":10,"v":648.5709838867188,"z":200},{"c":0,"d":"PIEZA ANABOLIC ST ESTANOZOLOL - 100 ML","i":"22","k":"22","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ANABOLIC ST ESTANOZOLOL - 100 TAB","i":"20","k":"20","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ANABOLIC ST ESTANOZOLOL - 20 ML","i":"21","k":"21","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ANABOLIC ST ESTANOZOLOL - 250 ML","i":"23","k":"23","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ANAPIRAN - 40 ML","i":"24","k":"24","l":"null","p":"$170.9","u":10,"v":170.89599609375,"z":200},{"c":0,"d":"PIEZA ANTI ESTRES - 1 KG","i":"403","k":"403","l":"null","p":"$880","u":10,"v":880,"z":200},{"c":0,"d":"PIEZA ANTI ESTRES - 10 KG","i":"461","k":"461","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ANTI ESTRES - 25X20 G","i":"25","k":"25","l":"null","p":"$569.67","u":10,"v":569.6680297851562,"z":200},{"c":0,"d":"PIEZA ANTIDIARREICO - 1 LT","i":"28","k":"28","l":"null","p":"$906.29","u":10,"v":906.2899780273438,"z":200},{"c":0,"d":"PIEZA ANTIDIARREICO - 100 ML","i":"26","k":"26","l":"null","p":"$135.95","u":10,"v":135.94900512695312,"z":200},{"c":0,"d":"PIEZA ANTIDIARREICO - 250 ML","i":"27","k":"27","l":"null","p":"$271.89","u":10,"v":271.8869934082031,"z":200},{"c":0,"d":"PIEZA ANTIDIARREICO - 5 LT","i":"475","k":"475","l":"null","p":"$4,531.45","u":10,"v":4531.4501953125,"z":200},{"c":0,"d":"PIEZA ANTIDIARREICO - 500 ML","i":"429","k":"429","l":"null","p":"$451","u":10,"v":451,"z":200},{"c":0,"d":"PIEZA AZUL- V ULTRA CICATRIZANTE - 120 ML","i":"607","k":"607","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 10 ML","i":"29","k":"29","l":"null","p":"$108.76","u":10,"v":108.75700378417969,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 100 ML","i":"31","k":"31","l":"null","p":"$620.72","u":10,"v":620.718994140625,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 20 TAB","i":"30","k":"30","l":"null","p":"$150.68","u":10,"v":150.67799377441406,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 250 ML","i":"32","k":"32","l":"null","p":"$1,241.45","u":10,"v":1241.448974609375,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 5 ML","i":"454","k":"454","l":"null","p":"$74.8","u":10,"v":74.80000305175781,"z":200},{"c":0,"d":"PIEZA B12 5 500 - 50 ML","i":"455","k":"455","l":"null","p":"$349.8","u":10,"v":349.79998779296875,"z":200},{"c":0,"d":"PIEZA B12 6 500 - 10 ML","i":"528","k":"528","l":"null","p":"$183.7","u":10,"v":183.6999969482422,"z":200},{"c":0,"d":"PIEZA B12 6 500 - 5 ML","i":"531","k":"531","l":"null","p":"$121","u":10,"v":121,"z":200},{"c":0,"d":"PIEZA B12\/5 500 CURATIVA - 120 ML","i":"604","k":"604","l":"null","p":"$980","u":10,"v":980,"z":200},{"c":0,"d":"PIEZA BALSAMO BLANCO - 150 G","i":"34","k":"34","l":"null","p":"$154.1","u":10,"v":154.0989990234375,"z":200},{"c":0,"d":"PIEZA BALSAMO BLANCO - 240 G","i":"35","k":"35","l":"null","p":"$246.57","u":10,"v":246.56500244140625,"z":200},{"c":0,"d":"PIEZA BALSAMO BLANCO - 60 G","i":"33","k":"33","l":"null","p":"$73.7","u":10,"v":73.69999694824219,"z":200},{"c":0,"d":"PIEZA BAMITOL - 200 G","i":"1007","k":"1007","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BAMITOL - 60 G","i":"1006","k":"1006","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BETAMICIL - 100 ML","i":"36","k":"36","l":"null","p":"$697.84","u":10,"v":697.8400268554688,"z":200},{"c":0,"d":"PIEZA BETAMICIL - 20 ML","i":"495","k":"495","l":"null","p":"$154","u":10,"v":154,"z":200},{"c":0,"d":"PIEZA BETAMICIL - 250 ML","i":"398","k":"398","l":"null","p":"$1,395.69","u":10,"v":1395.6910400390625,"z":200},{"c":0,"d":"PIEZA BIO AZTECA - 150 G","i":"38","k":"38","l":"null","p":"$126.7","u":10,"v":126.697998046875,"z":200},{"c":0,"d":"PIEZA BIO AZTECA - 240 G","i":"39","k":"39","l":"null","p":"$202.73","u":10,"v":202.72999572753906,"z":200},{"c":0,"d":"PIEZA BIO AZTECA - 60 G","i":"37","k":"37","l":"null","p":"$60.6","u":10,"v":60.5989990234375,"z":200},{"c":0,"d":"PIEZA BIO AZUL ATOM  - 120 ML","i":"40","k":"40","l":"null","p":"$104.07","u":10,"v":104.07099914550781,"z":200},{"c":0,"d":"PIEZA BIO AZUL GALLO - 12X30 ML","i":"41","k":"41","l":"null","p":"$387.11","u":10,"v":387.11199951171875,"z":200},{"c":0,"d":"PIEZA BIO AZUL GOTERO - 100 ML","i":"446","k":"446","l":"null","p":"$88.55","u":10,"v":88.55000305175781,"z":200},{"c":0,"d":"PIEZA BIO AZUL MASCOTAS - 12X30 ML","i":"42","k":"42","l":"null","p":"$387.11","u":10,"v":387.11199951171875,"z":200},{"c":0,"d":"PIEZA BIO CALCIO  - 100 G","i":"559","k":"559","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO CALCIO - 1 KG","i":"44","k":"44","l":"null","p":"$1,310.23","u":10,"v":1310.2320556640625,"z":200},{"c":0,"d":"PIEZA BIO CALCIO - 25X20 G","i":"43","k":"43","l":"null","p":"$818.9","u":10,"v":818.89501953125,"z":200},{"c":0,"d":"PIEZA BIO CALCIO - 5 KG","i":"425","k":"425","l":"null","p":"$4,466.71","u":10,"v":4466.71484375,"z":200},{"c":0,"d":"PIEZA BIO CALCIO FORTE GALLO - 100 TAB","i":"45","k":"45","l":"null","p":"$268","u":10,"v":268.0039978027344,"z":200},{"c":0,"d":"PIEZA BIO CALCIO FORTE PUPPY - 100 TAB","i":"46","k":"46","l":"null","p":"$268","u":10,"v":268.0039978027344,"z":200},{"c":0,"d":"PIEZA BIO CITRUS - 1 LT","i":"48","k":"48","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO CITRUS - 120 ML","i":"47","k":"47","l":"null","p":"$99.69","u":10,"v":99.69300079345703,"z":200},{"c":0,"d":"PIEZA BIO D TIF - 1 KG","i":"450","k":"450","l":"null","p":"$1,298","u":10,"v":1298,"z":200},{"c":0,"d":"PIEZA BIO D TIF - 20X30 TAB","i":"50","k":"50","l":"null","p":"$886.04","u":10,"v":886.0390014648438,"z":200},{"c":0,"d":"PIEZA BIO D TIF - 25X20 G","i":"49","k":"49","l":"null","p":"$781.68","u":10,"v":781.6820068359375,"z":200},{"c":0,"d":"PIEZA BIO D TIF - 500 TAB","i":"453","k":"453","l":"null","p":"$780","u":10,"v":780,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 10 ML","i":"51","k":"51","l":"null","p":"$38.85","u":10,"v":38.85200119018555,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 100 ML","i":"53","k":"53","l":"null","p":"$188.34","u":10,"v":188.3419952392578,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 25 ML","i":"52","k":"52","l":"null","p":"$74.45","u":10,"v":74.447998046875,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 250 ML","i":"54","k":"54","l":"null","p":"$376.7","u":10,"v":376.69500732421875,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 50 ML","i":"388","k":"388","l":"null","p":"$101.2","u":10,"v":101.19999694824219,"z":200},{"c":0,"d":"PIEZA BIO DEXAVET - 500 ML","i":"55","k":"55","l":"null","p":"$628.91","u":10,"v":628.9140014648438,"z":200},{"c":0,"d":"PIEZA BIO DIPIRONA - 20 ML","i":"56","k":"56","l":"null","p":"$73.26","u":10,"v":73.26000213623047,"z":200},{"c":0,"d":"PIEZA BIO DIPIRONA - 250 ML","i":"57","k":"57","l":"null","p":"$393.07","u":10,"v":393.0740051269531,"z":200},{"c":0,"d":"PIEZA BIO DIPIRONA - 500 ML","i":"58","k":"58","l":"null","p":"$628.9","u":10,"v":628.9030151367188,"z":200},{"c":0,"d":"PIEZA BIO ESTREPTO - 50 MILL","i":"399","k":"399","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO ESTREPTO - 6 MILL","i":"390","k":"390","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO GENT FORTE - 100 ML","i":"59","k":"59","l":"null","p":"$282.52","u":10,"v":282.52398681640625,"z":200},{"c":0,"d":"PIEZA BIO GENT FORTE - 250 ML","i":"60","k":"60","l":"null","p":"$565.04","u":10,"v":565.0369873046875,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 - 10 ML","i":"61","k":"61","l":"null","p":"$75","u":10,"v":75,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 - 100 ML","i":"63","k":"63","l":"null","p":"$409.3","u":10,"v":409.29901123046875,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 - 20 ML","i":"62","k":"62","l":"null","p":"$136.43","u":10,"v":136.43299865722656,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 - 250 ML","i":"64","k":"64","l":"null","p":"$783.3","u":10,"v":783.2990112304688,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 - 50 ML","i":"396","k":"396","l":"null","p":"$204.6","u":10,"v":204.60000610351562,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 PROTEICO - 100 ML","i":"582","k":"582","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO HIERRRO 200 PROTEICO - 20 ML","i":"512","k":"512","l":"null","p":"$148.5","u":10,"v":148.5,"z":200},{"c":0,"d":"PIEZA BIO LZYN NF - 1 KG","i":"541","k":"541","l":"null","p":"$1,980","u":10,"v":1980,"z":200},{"c":0,"d":"PIEZA BIO LZYN NF - 100 GRS","i":"568","k":"568","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO LZYN NF - 5 KG","i":"517","k":"517","l":"null","p":"$9,460","u":10,"v":9460,"z":200},{"c":0,"d":"PIEZA BIO LZYN NF - 50X10 G","i":"65","k":"65","l":"null","p":"$1,149.5","u":10,"v":1149.5,"z":200},{"c":0,"d":"PIEZA BIO MELUBRIN 500 - 100 ML","i":"67","k":"67","l":"null","p":"$196.53","u":10,"v":196.5260009765625,"z":200},{"c":0,"d":"PIEZA BIO MELUBRIN 500 - 20 ML","i":"66","k":"66","l":"null","p":"$73.26","u":10,"v":73.26000213623047,"z":200},{"c":0,"d":"PIEZA BIO MELUBRIN 500 - 250 ML","i":"68","k":"68","l":"null","p":"$393.07","u":10,"v":393.0740051269531,"z":200},{"c":0,"d":"PIEZA BIO MELUBRIN 500 - 500 ML","i":"69","k":"69","l":"null","p":"$628.9","u":10,"v":628.9030151367188,"z":200},{"c":0,"d":"PIEZA BIO NATURAL ICE GEL - 150 G","i":"71","k":"71","l":"null","p":"$158.71","u":10,"v":158.70799255371094,"z":200},{"c":0,"d":"PIEZA BIO NATURAL ICE GEL - 240 G","i":"72","k":"72","l":"null","p":"$193.64","u":10,"v":193.6439971923828,"z":200},{"c":0,"d":"PIEZA BIO NATURAL ICE GEL - 60 G","i":"70","k":"70","l":"null","p":"$80.12","u":10,"v":80.1240005493164,"z":200},{"c":0,"d":"PIEZA BIO PARTO 20UI\/ML - 10 ML","i":"73","k":"73","l":"null","p":"$47.64","u":10,"v":47.64099884033203,"z":200},{"c":0,"d":"PIEZA BIO PARTO 20UI\/ML - 100 ML","i":"75","k":"75","l":"null","p":"$236.29","u":10,"v":236.29100036621094,"z":200},{"c":0,"d":"PIEZA BIO PARTO 20UI\/ML - 20 ML","i":"74","k":"74","l":"null","p":"$78.76","u":10,"v":78.76000213623047,"z":200},{"c":0,"d":"PIEZA BIO PARTO 20UI\/ML - 250 ML","i":"76","k":"76","l":"null","p":"$472.58","u":10,"v":472.5820007324219,"z":200},{"c":0,"d":"PIEZA BIO PARTO 20UI\/ML - 500 ML","i":"77","k":"77","l":"null","p":"$756.13","u":10,"v":756.1290283203125,"z":200},{"c":0,"d":"PIEZA BIO PEN 75 MILLONES - 250 ML","i":"436","k":"436","l":"null","p":"$834.9","u":10,"v":834.9000244140625,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 1 MILL - 5 ML","i":"78","k":"78","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 100 MILL - 500 ML","i":"79","k":"79","l":"null","p":"$1,782","u":10,"v":1782,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 2 MILL - 10 ML","i":"463","k":"463","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 20 MILL - 100 ML","i":"80","k":"80","l":"null","p":"$592.88","u":10,"v":592.8779907226562,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 4 MILL - 20 ML","i":"464","k":"464","l":"null","p":"$224.4","u":10,"v":224.39999389648438,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE 50 MILL - 250 ML","i":"81","k":"81","l":"null","p":"$1,139.34","u":10,"v":1139.3360595703125,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE DOSIS AVIAR - 20 ML","i":"497","k":"497","l":"null","p":"$224.4","u":10,"v":224.39999389648438,"z":200},{"c":0,"d":"PIEZA BIO PEN FORTE DOSIS AVIAR - 5 ML","i":"82","k":"82","l":"null","p":"$67.01","u":10,"v":67.01200103759766,"z":200},{"c":0,"d":"PIEZA BIO PEN PLUS 20 +4 MILLONES - 100 ML","i":"580","k":"580","l":"null","p":"$592.88","u":10,"v":592.8779907226562,"z":200},{"c":0,"d":"PIEZA BIO PEN PLUS 50 MILLONES - 250 ML","i":"548","k":"548","l":"null","p":"$1,139.34","u":10,"v":1139.3360595703125,"z":200},{"c":0,"d":"PIEZA BIO PEN PUPPY - 5 ML","i":"432","k":"432","l":"null","p":"$67.01","u":10,"v":67.01200103759766,"z":200},{"c":0,"d":"PIEZA BIO PEN SENCILLO 30 MILLONES  - 100 ML","i":"484","k":"484","l":"null","p":"$417.45","u":10,"v":417.45001220703125,"z":200},{"c":0,"d":"PIEZA BIO PORUT - 150 G","i":"84","k":"84","l":"null","p":"$124.29","u":10,"v":124.28900146484375,"z":200},{"c":0,"d":"PIEZA BIO PORUT - 60 G","i":"83","k":"83","l":"null","p":"$59.55","u":10,"v":59.55400085449219,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 10 ML","i":"85","k":"85","l":"null","p":"$64.9","u":10,"v":64.9000015258789,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 100 ML","i":"87","k":"87","l":"null","p":"$347.21","u":10,"v":347.2149963378906,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 25 ML","i":"86","k":"86","l":"null","p":"$114.64","u":10,"v":114.64199829101562,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 250 ML","i":"88","k":"88","l":"null","p":"$694.42","u":10,"v":694.4190063476562,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 50 ML","i":"392","k":"392","l":"null","p":"$282.9","u":10,"v":282.89801025390625,"z":200},{"c":0,"d":"PIEZA BIO RESPIL - 500 ML","i":"89","k":"89","l":"null","p":"$1,110.43","u":10,"v":1110.427978515625,"z":200},{"c":0,"d":"PIEZA BIO SARNA - 150 G","i":"91","k":"91","l":"null","p":"$131.03","u":10,"v":131.03199768066406,"z":200},{"c":0,"d":"PIEZA BIO SARNA - 240 G","i":"92","k":"92","l":"null","p":"$163.78","u":10,"v":163.7790069580078,"z":200},{"c":0,"d":"PIEZA BIO SARNA - 60 G","i":"90","k":"90","l":"null","p":"$65.52","u":10,"v":65.51599884033203,"z":200},{"c":0,"d":"PIEZA BIO TAFORT  - 25X20 G","i":"529","k":"529","l":"null","p":"$869","u":10,"v":869,"z":200},{"c":0,"d":"PIEZA BIO TAFORT  - 500 G","i":"538","k":"538","l":"null","p":"$726","u":10,"v":726,"z":200},{"c":0,"d":"PIEZA BIO VERMI CACHORRO - 30 TAB","i":"93","k":"93","l":"null","p":"$150.68","u":10,"v":150.67799377441406,"z":200},{"c":0,"d":"PIEZA BIO VERMI CAN - 30 TAB","i":"94","k":"94","l":"null","p":"$169.08","u":10,"v":169.08099365234375,"z":200},{"c":0,"d":"PIEZA BIO VERMI CAN GOLD - 17X15 TAB","i":"95","k":"95","l":"null","p":"$1,340.02","u":10,"v":1340.02001953125,"z":200},{"c":0,"d":"PIEZA BIO VERMI CAN GOLD - 30 TAB","i":"96","k":"96","l":"null","p":"$188.34","u":10,"v":188.3419952392578,"z":200},{"c":0,"d":"PIEZA BIO VERMI GALLO - 20 TAB","i":"98","k":"98","l":"null","p":"$120.71","u":10,"v":120.71399688720703,"z":200},{"c":0,"d":"PIEZA BIO VERMI GALLO - 20X30 TAB","i":"97","k":"97","l":"null","p":"$1,488.91","u":10,"v":1488.905029296875,"z":200},{"c":0,"d":"PIEZA BIO VERMI GALLO GOLD - 20X30 TAB","i":"465","k":"465","l":"null","p":"$1,859","u":10,"v":1859,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 12 5 % - 100 ML","i":"99","k":"99","l":"null","p":"$178.67","u":10,"v":178.67300415039062,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 12 5 % - 25 ML","i":"574","k":"574","l":"null","p":"$50","u":10,"v":50,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 12 5 % - 250 ML","i":"100","k":"100","l":"null","p":"$357.33","u":10,"v":357.3349914550781,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 12 5 % - 500 ML","i":"101","k":"101","l":"null","p":"$573.23","u":10,"v":573.2319946289062,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 15 % - 100 ML","i":"102","k":"102","l":"null","p":"$148.9","u":10,"v":148.89599609375,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 15 % - 250 ML","i":"103","k":"103","l":"null","p":"$297.78","u":10,"v":297.781005859375,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL 15 % - 500 ML","i":"104","k":"104","l":"null","p":"$553.87","u":10,"v":553.8720092773438,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL ADE - 100 ML","i":"105","k":"105","l":"null","p":"$189.75","u":10,"v":189.75,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL ADE - 250 ML","i":"106","k":"106","l":"null","p":"$379.5","u":10,"v":379.5,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL ADE - 50 ML","i":"523","k":"523","l":"null","p":"$101.2","u":10,"v":101.19999694824219,"z":200},{"c":0,"d":"PIEZA BIO VERMISOL ADE - 500 ML","i":"107","k":"107","l":"null","p":"$786.5","u":10,"v":786.5,"z":200},{"c":0,"d":"PIEZA BIO VIT OTIC - 1 KG","i":"472","k":"472","l":"null","p":"$759","u":10,"v":759,"z":200},{"c":0,"d":"PIEZA BIO VIT OTIC - 25X20 G","i":"108","k":"108","l":"null","p":"$786.15","u":10,"v":786.1480102539062,"z":200},{"c":0,"d":"PIEZA BIO VIT OTIC - 5 KG","i":"557","k":"557","l":"null","p":"$3,430","u":10,"v":3430,"z":200},{"c":0,"d":"PIEZA BIO VITAL 5 500 - 10 ML","i":"109","k":"109","l":"null","p":"$109.72","u":10,"v":109.7249984741211,"z":200},{"c":0,"d":"PIEZA BIO VITAL 5 500 - 100 ML","i":"111","k":"111","l":"null","p":"$753.38","u":10,"v":753.3790283203125,"z":200},{"c":0,"d":"PIEZA BIO VITAL 5 500 - 20 TAB","i":"110","k":"110","l":"null","p":"$163.78","u":10,"v":163.7790069580078,"z":200},{"c":0,"d":"PIEZA BIODYL - 50 ML","i":"469","k":"469","l":"null","p":"$700","u":10,"v":700,"z":200},{"c":0,"d":"PIEZA BIOLINIMENTO CABALLO - 120 ML","i":"112","k":"112","l":"null","p":"$116.14","u":10,"v":116.13800048828125,"z":200},{"c":0,"d":"PIEZA BIOLINIMENTO FUTBOLISTA - 120 ML","i":"113","k":"113","l":"null","p":"$116.14","u":10,"v":116.13800048828125,"z":200},{"c":0,"d":"PIEZA BIOTRYL ORAL - 12X30 ML","i":"114","k":"114","l":"null","p":"$607.2","u":10,"v":607.2000122070312,"z":200},{"c":0,"d":"PIEZA BIOTRYL ORAL 5MG\/5ML MASCOTAS - 100 ML","i":"115","k":"115","l":"null","p":"$302.96","u":10,"v":302.9620056152344,"z":200},{"c":0,"d":"PIEZA BOLDE SE - 250 ML","i":"565","k":"565","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOLDENONE ROSA - 250 ML","i":"420","k":"420","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOLDEVET  - 20 ML","i":"116","k":"116","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOLDEVET - 100 ML","i":"485","k":"485","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOLDEVET - 250 ML","i":"117","k":"117","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOVI VET 2 - 250 ML","i":"118","k":"118","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA BOVI VET 3 - 250 ML","i":"119","k":"119","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA CALCIO NEGRO PROTEICO - 100 ML","i":"120","k":"120","l":"null","p":"$301.35","u":10,"v":301.3450012207031,"z":200},{"c":0,"d":"PIEZA CALCIO NEGRO PROTEICO - 250 ML","i":"121","k":"121","l":"null","p":"$576.51","u":10,"v":576.510009765625,"z":200},{"c":0,"d":"PIEZA CALCIO NEGRO SENCILLO - 100 ML","i":"122","k":"122","l":"null","p":"$268","u":10,"v":268.0039978027344,"z":200},{"c":0,"d":"PIEZA CALCIO NEGRO SENCILLO - 500 ML","i":"123","k":"123","l":"null","p":"$521.11","u":10,"v":521.114013671875,"z":200},{"c":0,"d":"PIEZA CALCIO NF 500  - 100 ML","i":"124","k":"124","l":"null","p":"$334.11","u":10,"v":334.114013671875,"z":200},{"c":0,"d":"PIEZA CALCIO NF 500  - 250 ML","i":"125","k":"125","l":"null","p":"$668.23","u":10,"v":668.22802734375,"z":200},{"c":0,"d":"PIEZA CALCIO PROTEINOL VITAMINADO - 500 ML","i":"126","k":"126","l":"null","p":"$372.23","u":10,"v":372.22900390625,"z":200},{"c":0,"d":"PIEZA CALFORVET ORAL - 300 ML","i":"127","k":"127","l":"null","p":"$245.67","u":10,"v":245.6739959716797,"z":200},{"c":0,"d":"PIEZA CANOVET - 30 TAB","i":"128","k":"128","l":"null","p":"$290.95","u":10,"v":290.95001220703125,"z":200},{"c":0,"d":"PIEZA CATAFOSGEN + B12 - 100 ML","i":"130","k":"130","l":"null","p":"$470.87","u":10,"v":470.8659973144531,"z":200},{"c":0,"d":"PIEZA CATAFOSGEN + B12 - 20 ML","i":"129","k":"129","l":"null","p":"$147.4","u":10,"v":147.39999389648438,"z":200},{"c":0,"d":"PIEZA CATAFOSGEN + B12 - 250 ML","i":"131","k":"131","l":"null","p":"$941.73","u":10,"v":941.7319946289062,"z":200},{"c":0,"d":"PIEZA CATAFOSGEN + B12 - 500 ML","i":"598","k":"598","l":"null","p":"$1,840","u":10,"v":1840,"z":200},{"c":0,"d":"PIEZA CATARROL GALLO - 20 TAB","i":"139","k":"139","l":"null","p":"$151.8","u":10,"v":151.8000030517578,"z":200},{"c":0,"d":"PIEZA CATARROL IM - 100 ML","i":"133","k":"133","l":"null","p":"$290.95","u":10,"v":290.95001220703125,"z":200},{"c":0,"d":"PIEZA CATARROL IM - 12 ML","i":"132","k":"132","l":"null","p":"$108.79","u":10,"v":108.79000091552734,"z":200},{"c":0,"d":"PIEZA CATARROL IM - 120 ML","i":"415","k":"415","l":"null","p":"$290.95","u":10,"v":290.95001220703125,"z":200},{"c":0,"d":"PIEZA CATARROL ORAL - 1 LT","i":"136","k":"136","l":"null","p":"$2,277","u":10,"v":2277,"z":200},{"c":0,"d":"PIEZA CATARROL ORAL - 100 ML","i":"135","k":"135","l":"null","p":"$283.36","u":10,"v":283.3599853515625,"z":200},{"c":0,"d":"PIEZA CATARROL ORAL - 15 ML","i":"134","k":"134","l":"null","p":"$101.2","u":10,"v":101.19999694824219,"z":200},{"c":0,"d":"PIEZA CATARROL ORAL - 150 ML","i":"150","k":"150","l":"null","p":"$300","u":10,"v":300,"z":200},{"c":0,"d":"PIEZA CATARROL PUPPY - 20 TAB","i":"482","k":"482","l":"null","p":"$106.26","u":10,"v":106.26000213623047,"z":200},{"c":0,"d":"PIEZA CATARROL RUMIANTES - 100 ML","i":"137","k":"137","l":"null","p":"$550.55","u":10,"v":550.5499877929688,"z":200},{"c":0,"d":"PIEZA CATARROL RUMIANTES - 250 ML","i":"138","k":"138","l":"null","p":"$1,101.1","u":10,"v":1101.0999755859375,"z":200},{"c":0,"d":"PIEZA CEFAXIN - 30 TAB","i":"140","k":"140","l":"null","p":"$269.46","u":10,"v":269.45599365234375,"z":200},{"c":0,"d":"PIEZA CEFTIBIO MASTITIS - 12X10 ML","i":"141","k":"141","l":"null","p":"$572","u":10,"v":572,"z":200},{"c":0,"d":"PIEZA CEFTIBIO PPR - 100 ML","i":"391","k":"391","l":"null","p":"$626.64","u":10,"v":626.6370239257812,"z":200},{"c":0,"d":"PIEZA CEFTIBIO RTU - 100 ML","i":"142","k":"142","l":"null","p":"$626.64","u":10,"v":626.6370239257812,"z":200},{"c":0,"d":"PIEZA CEFTIBIO RTU - 250 ML","i":"143","k":"143","l":"null","p":"$1,253.27","u":10,"v":1253.2740478515625,"z":200},{"c":0,"d":"PIEZA CEPTIO FUR - 100 ML","i":"145","k":"145","l":"null","p":"$626.64","u":10,"v":626.6370239257812,"z":200},{"c":0,"d":"PIEZA CEPTIO FUR - 20 ML","i":"144","k":"144","l":"null","p":"$227.87","u":10,"v":227.86500549316406,"z":200},{"c":0,"d":"PIEZA CEPTIO FUR - 250 ML","i":"146","k":"146","l":"null","p":"$1,253.27","u":10,"v":1253.2740478515625,"z":200},{"c":0,"d":"PIEZA CICATRISAN ATOM - 120 ML","i":"147","k":"147","l":"null","p":"$158.12","u":10,"v":158.125,"z":200},{"c":0,"d":"PIEZA CICATRISAN GALLO - 12X30 ML","i":"441","k":"441","l":"null","p":"$616","u":10,"v":616,"z":200},{"c":0,"d":"PIEZA CICATRISAN GOTERO - 100 ML","i":"444","k":"444","l":"null","p":"$139.15","u":10,"v":139.14999389648438,"z":200},{"c":0,"d":"PIEZA CICATROL ATOM - 120 ML","i":"148","k":"148","l":"null","p":"$158.12","u":10,"v":158.125,"z":200},{"c":0,"d":"PIEZA CICATROL GALLO - 12X30 ML","i":"442","k":"442","l":"null","p":"$484","u":10,"v":484,"z":200},{"c":0,"d":"PIEZA CICATROL GOTERO - 100 ML","i":"445","k":"445","l":"null","p":"$139.15","u":10,"v":139.14999389648438,"z":200},{"c":0,"d":"PIEZA CICATROL MASCOTA - 12X30 ML","i":"443","k":"443","l":"null","p":"$484","u":10,"v":484,"z":200},{"c":0,"d":"PIEZA COCCI BIO - 1 LT","i":"155","k":"155","l":"null","p":"$1,936","u":10,"v":1936,"z":200},{"c":0,"d":"PIEZA COCCI BIO - 20X30 TAB","i":"152","k":"152","l":"null","p":"$1,815","u":10,"v":1815,"z":200},{"c":0,"d":"PIEZA COCCI BIO - 30 TAB","i":"151","k":"151","l":"null","p":"$140.84","u":10,"v":140.843994140625,"z":200},{"c":0,"d":"PIEZA COCCI BIO GALLO - 12X30 ML","i":"153","k":"153","l":"null","p":"$1,028.5","u":10,"v":1028.5,"z":200},{"c":0,"d":"PIEZA COCCI BIO PAJARO - 12X30 ML","i":"154","k":"154","l":"null","p":"$1,028.5","u":10,"v":1028.5,"z":200},{"c":0,"d":"PIEZA COCCI BIO SOLUBLE - 1 KG","i":"540","k":"540","l":"null","p":"$1,507","u":10,"v":1507,"z":200},{"c":0,"d":"PIEZA COCCI BIO SOLUBLE - 25X20 G","i":"156","k":"156","l":"null","p":"$907.5","u":10,"v":907.5,"z":200},{"c":0,"d":"PIEZA COMPLEJO B CON EXTRACTO DE HIGADO  - 100 ML","i":"535","k":"535","l":"null","p":"$176","u":10,"v":176,"z":200},{"c":0,"d":"PIEZA COMPLEX B+ ADE - 100 ML","i":"158","k":"158","l":"null","p":"$269.46","u":10,"v":269.45599365234375,"z":200},{"c":0,"d":"PIEZA COMPLEX B+ ADE - 20 ML","i":"157","k":"157","l":"null","p":"$87.32","u":10,"v":87.31800079345703,"z":200},{"c":0,"d":"PIEZA COMPLEX B+ ADE - 250 ML","i":"159","k":"159","l":"null","p":"$538.91","u":10,"v":538.9119873046875,"z":200},{"c":0,"d":"PIEZA COMPLEX B+ ADE - 50 ML","i":"539","k":"539","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA COMPLEX B+ ADE - 500 ML","i":"160","k":"160","l":"null","p":"$901.44","u":10,"v":901.4390258789062,"z":200},{"c":0,"d":"PIEZA CUBENSIL - 100 ML","i":"492","k":"492","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA CUBENSIL - 50 ML","i":"489","k":"489","l":"null","p":"$316.25","u":10,"v":316.25,"z":200},{"c":0,"d":"PIEZA CUBETA OXITAMUTIL - 10 KG","i":"486","k":"486","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA CYANO COBALAMIN HIDROXO 2000 - 100 ML","i":"161","k":"161","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA CYANO COBALAMIN HIDROXO 6000 - 10 ML","i":"162","k":"162","l":"null","p":"$108.76","u":10,"v":108.75700378417969,"z":200},{"c":0,"d":"PIEZA CYANO COBALAMIN HIDROXO 6000 - 100 ML","i":"163","k":"163","l":"null","p":"$640.23","u":10,"v":640.2329711914062,"z":200},{"c":0,"d":"PIEZA CYANO COBALAMIN HIDROXO 6000 - 250 ML","i":"164","k":"164","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DECA BOLD - 100 ML","i":"587","k":"587","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DECA BOLD - 250 ML","i":"588","k":"588","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DEXTREP REFORZADO  - 50 MILL","i":"550","k":"550","l":"null","p":"$869","u":10,"v":869,"z":200},{"c":0,"d":"PIEZA DEXTREP REFORZADO  - 6 MILL","i":"549","k":"549","l":"null","p":"$165","u":10,"v":165,"z":200},{"c":0,"d":"PIEZA DIARRECAN - 100 ML","i":"165","k":"165","l":"null","p":"$139.57","u":10,"v":139.5679931640625,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 4% - 100 ML","i":"167","k":"167","l":"null","p":"$217.76","u":10,"v":217.75599670410156,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 4% - 20 ML","i":"166","k":"166","l":"null","p":"$68.49","u":10,"v":68.48600006103516,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 4% - 250 ML","i":"168","k":"168","l":"null","p":"$435.51","u":10,"v":435.5119934082031,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 4% - 500 ML","i":"169","k":"169","l":"null","p":"$823.9","u":10,"v":823.9000244140625,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 5% - 100 ML","i":"583","k":"583","l":"null","p":"$250","u":10,"v":250,"z":200},{"c":0,"d":"PIEZA DICLOFENACO 5% - 250 ML","i":"170","k":"170","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DIFURSAN - 1 KG","i":"451","k":"451","l":"null","p":"$1,188","u":10,"v":1188,"z":200},{"c":0,"d":"PIEZA DIFURSAN - 25X20 G","i":"171","k":"171","l":"null","p":"$783.3","u":10,"v":783.2990112304688,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SOLUCION - 100 ML","i":"172","k":"172","l":"null","p":"$234.99","u":10,"v":234.9929962158203,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SOLUCION - 20 ML","i":"459","k":"459","l":"null","p":"$68","u":10,"v":68,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SOLUCION - 250 ML","i":"173","k":"173","l":"null","p":"$469.98","u":10,"v":469.9750061035156,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SOLUCION - 50 ML","i":"460","k":"460","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SUSPENSION - 100 ML","i":"174","k":"174","l":"null","p":"$234.99","u":10,"v":234.9929962158203,"z":200},{"c":0,"d":"PIEZA DIMETRIGEN SUSPENSION - 250 ML","i":"175","k":"175","l":"null","p":"$469.98","u":10,"v":469.9750061035156,"z":200},{"c":0,"d":"PIEZA DINAM VET ADE 4% - 500 ML","i":"487","k":"487","l":"null","p":"$2,508","u":10,"v":2508,"z":200},{"c":0,"d":"PIEZA DIPIROTRIL - 100 ML","i":"177","k":"177","l":"null","p":"$188.34","u":10,"v":188.3419952392578,"z":200},{"c":0,"d":"PIEZA DIPIROTRIL - 25 ML","i":"176","k":"176","l":"null","p":"$68.36","u":10,"v":68.36499786376953,"z":200},{"c":0,"d":"PIEZA DIPIROTRIL - 250 ML","i":"178","k":"178","l":"null","p":"$376.7","u":10,"v":376.69500732421875,"z":200},{"c":0,"d":"PIEZA DIPIROTRIL - 50 ML","i":"408","k":"408","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA DIPIROTRIL - 500 ML","i":"179","k":"179","l":"null","p":"$602.71","u":10,"v":602.7119750976562,"z":200},{"c":0,"d":"PIEZA DOGGY PLEX TOTAL - 100 ML","i":"409","k":"409","l":"null","p":"$759","u":10,"v":759,"z":200},{"c":0,"d":"PIEZA DOGGY PLEX TOTAL - 15 ML","i":"394","k":"394","l":"null","p":"$115.94","u":10,"v":115.94000244140625,"z":200},{"c":0,"d":"PIEZA DOLATAC - 30 TAB","i":"180","k":"180","l":"null","p":"$139.22","u":10,"v":139.21600341796875,"z":200},{"c":0,"d":"PIEZA DORA EQUINO ADE - 2X12 ML","i":"561","k":"561","l":"null","p":"$245","u":10,"v":245,"z":200},{"c":0,"d":"PIEZA DORANOVET PREMIUM - 500 ML","i":"608","k":"608","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ECTO MAX FORTE - 1 LT","i":"413","k":"413","l":"null","p":"$968","u":10,"v":968,"z":200},{"c":0,"d":"PIEZA ECTO MAX FORTE - 5 LT","i":"430","k":"430","l":"null","p":"$4,554","u":10,"v":4554,"z":200},{"c":0,"d":"PIEZA ELECTRO AMINO BOOST + COMPLEJO B - 500 ML","i":"437","k":"437","l":"null","p":"$357.5","u":10,"v":357.5,"z":200},{"c":0,"d":"PIEZA ELECTRO AMINOLITOS - 500 ML","i":"547","k":"547","l":"null","p":"$253.11","u":10,"v":253.11000061035156,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO  - 24X100G","i":"393","k":"393","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO  - 25X20 G","i":"181","k":"181","l":"null","p":"$405.35","u":10,"v":405.3500061035156,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO  - 5 KG","i":"558","k":"558","l":"null","p":"$1,450","u":10,"v":1450,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO - 1 KG","i":"447","k":"447","l":"null","p":"$638","u":10,"v":638,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO - 10 KG","i":"458","k":"458","l":"null","p":"$3,410","u":10,"v":3410,"z":200},{"c":0,"d":"PIEZA ELECTRO BIO - 100 GRS","i":"474","k":"474","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ENROBIO 100 - 10 ML","i":"411","k":"411","l":"null","p":"$37.4","u":10,"v":37.400001525878906,"z":200},{"c":0,"d":"PIEZA ENROBIO 100 - 100 ML","i":"187","k":"187","l":"null","p":"$208.45","u":10,"v":208.4499969482422,"z":200},{"c":0,"d":"PIEZA ENROBIO 100 - 25 ML","i":"186","k":"186","l":"null","p":"$74.45","u":10,"v":74.447998046875,"z":200},{"c":0,"d":"PIEZA ENROBIO 100 - 250 ML","i":"188","k":"188","l":"null","p":"$416.89","u":10,"v":416.8890075683594,"z":200},{"c":0,"d":"PIEZA ENROBIO 100 - 500 ML","i":"189","k":"189","l":"null","p":"$655.12","u":10,"v":655.1160278320312,"z":200},{"c":0,"d":"PIEZA ENROBIO 50 - 100 ML","i":"183","k":"183","l":"null","p":"$160.5","u":10,"v":160.50100708007812,"z":200},{"c":0,"d":"PIEZA ENROBIO 50 - 25 ML","i":"182","k":"182","l":"null","p":"$56.58","u":10,"v":56.58399963378906,"z":200},{"c":0,"d":"PIEZA ENROBIO 50 - 250 ML","i":"184","k":"184","l":"null","p":"$321","u":10,"v":321.00201416015625,"z":200},{"c":0,"d":"PIEZA ENROBIO 50 - 500 ML","i":"185","k":"185","l":"null","p":"$513.61","u":10,"v":513.6119995117188,"z":200},{"c":0,"d":"PIEZA ENROFLAXINA 150 FORTE L A  - 100 ML","i":"190","k":"190","l":"null","p":"$268","u":10,"v":268.0039978027344,"z":200},{"c":0,"d":"PIEZA ENROFLAXINA 150 FORTE L A  - 250 ML","i":"520","k":"520","l":"null","p":"$576.4","u":10,"v":576.4000244140625,"z":200},{"c":0,"d":"PIEZA ENROTAB - 30 TAB","i":"191","k":"191","l":"null","p":"$157.53","u":10,"v":157.531005859375,"z":200},{"c":0,"d":"PIEZA EQUINO VET - 2X10 ML","i":"192","k":"192","l":"null","p":"$220.36","u":10,"v":220.36300659179688,"z":200},{"c":0,"d":"PIEZA EQUIPOISE - 10 ML","i":"193","k":"193","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA EQUIPOISE - 50 ML","i":"194","k":"194","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ERCAVET - 100 ML","i":"585","k":"585","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ERCAVET - 12 ML","i":"195","k":"195","l":"null","p":"$117.92","u":10,"v":117.91999816894531,"z":200},{"c":0,"d":"PIEZA ESTREPTO PLUS - 6 MILL","i":"196","k":"196","l":"null","p":"$160.5","u":10,"v":160.50100708007812,"z":200},{"c":0,"d":"PIEZA ESTREPTO PLUS 50 MILLONES - 250 ML","i":"573","k":"573","l":"null","p":"$550","u":10,"v":550,"z":200},{"c":0,"d":"PIEZA ESTREPTO QUIM - 2 MILL","i":"524","k":"524","l":"null","p":"$93.5","u":10,"v":93.5,"z":200},{"c":0,"d":"PIEZA ESTREPTO QUIM - 4 MILL","i":"525","k":"525","l":"null","p":"$137.5","u":10,"v":137.5,"z":200},{"c":0,"d":"PIEZA ESTREPTO QUIM - 6 MILL","i":"197","k":"197","l":"null","p":"$160.5","u":10,"v":160.50100708007812,"z":200},{"c":0,"d":"PIEZA ESTREPTO QUIM - 8 MILL","i":"516","k":"516","l":"null","p":"$179.3","u":10,"v":179.3000030517578,"z":200},{"c":0,"d":"PIEZA ESTREPTO QUIM 50 MILLONES - 250 ML","i":"536","k":"536","l":"null","p":"$548.9","u":10,"v":548.9000244140625,"z":200},{"c":0,"d":"PIEZA FENIL-BUTAVET - 100 ML","i":"198","k":"198","l":"null","p":"$446.68","u":10,"v":446.677001953125,"z":200},{"c":0,"d":"PIEZA FLOR BIO 300 - 100 ML","i":"199","k":"199","l":"null","p":"$455.4","u":10,"v":455.3999938964844,"z":200},{"c":0,"d":"PIEZA FLOR BIO 300 - 250 ML","i":"200","k":"200","l":"null","p":"$910.8","u":10,"v":910.7999877929688,"z":200},{"c":0,"d":"PIEZA FLORMICINA PLUS - 20 ML","i":"532","k":"532","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA FLUMICINA - 4 MILL","i":"503","k":"503","l":"null","p":"$136.28","u":10,"v":136.2790069580078,"z":200},{"c":0,"d":"PIEZA FLUMICINA - 6 MILL","i":"201","k":"201","l":"null","p":"$163.78","u":10,"v":163.7790069580078,"z":200},{"c":0,"d":"PIEZA FLUMICINA FORTE GALLO - 12 ML","i":"202","k":"202","l":"null","p":"$126.5","u":10,"v":126.5,"z":200},{"c":0,"d":"PIEZA FLUNYDINE - 10 ML","i":"203","k":"203","l":"null","p":"$101.52","u":10,"v":101.51899719238281,"z":200},{"c":0,"d":"PIEZA FLUNYDINE - 100 ML","i":"205","k":"205","l":"null","p":"$744.46","u":10,"v":744.4580078125,"z":200},{"c":0,"d":"PIEZA FLUNYDINE - 20 ML","i":"204","k":"204","l":"null","p":"$203.04","u":10,"v":203.03799438476562,"z":200},{"c":0,"d":"PIEZA FLUNYDINE - 250 ML","i":"206","k":"206","l":"null","p":"$1,218.19","u":10,"v":1218.1949462890625,"z":200},{"c":0,"d":"PIEZA FLUNYDINE FORTE - 100 ML","i":"208","k":"208","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA FLUNYDINE FORTE - 20 ML","i":"207","k":"207","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA FORT CAL VET - 120 ML","i":"566","k":"566","l":"null","p":"$340","u":10,"v":340,"z":200},{"c":0,"d":"PIEZA FOSFO ADE  - 100 ML","i":"569","k":"569","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA FOSFO ADE - 500 ML","i":"209","k":"209","l":"null","p":"$2,243.06","u":10,"v":2243.06494140625,"z":200},{"c":0,"d":"PIEZA FOSFO SE + ADE - 100 ML","i":"584","k":"584","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA FOSFO SE + ADE - 500 ML","i":"505","k":"505","l":"null","p":"$2,420","u":10,"v":2420,"z":200},{"c":0,"d":"PIEZA GARRAMOSKA - 1 LT","i":"592","k":"592","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA GARRAMOSKA - 100 ML","i":"514","k":"514","l":"null","p":"$275","u":10,"v":275,"z":200},{"c":0,"d":"PIEZA GARRAMOSKA - 20 LT","i":"521","k":"521","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA GARROTILLO - 20 TAB","i":"210","k":"210","l":"null","p":"$167.8","u":10,"v":167.80499267578125,"z":200},{"c":0,"d":"PIEZA GARROTILLO EQUINOS - 100 ML","i":"211","k":"211","l":"null","p":"$632.5","u":10,"v":632.5,"z":200},{"c":0,"d":"PIEZA GASTRO INMUNO CAN - 30 ML","i":"556","k":"556","l":"null","p":"$517","u":10,"v":517,"z":200},{"c":0,"d":"PIEZA GASTRO INMUNO CAN - 5 ML","i":"212","k":"212","l":"null","p":"$160.09","u":10,"v":160.093994140625,"z":200},{"c":0,"d":"PIEZA GASTRO INMUNO GALLO - 3 ML","i":"213","k":"213","l":"null","p":"$94.18","u":10,"v":94.18199920654297,"z":200},{"c":0,"d":"PIEZA GENTABIO 100 - 100 ML","i":"215","k":"215","l":"null","p":"$226.02","u":10,"v":226.01699829101562,"z":200},{"c":0,"d":"PIEZA GENTABIO 100 - 20 ML","i":"214","k":"214","l":"null","p":"$78.76","u":10,"v":78.76000213623047,"z":200},{"c":0,"d":"PIEZA GENTABIO 100 - 250 ML","i":"216","k":"216","l":"null","p":"$452.03","u":10,"v":452.03399658203125,"z":200},{"c":0,"d":"PIEZA GENTABIO 100 - 500 ML","i":"217","k":"217","l":"null","p":"$723.25","u":10,"v":723.25,"z":200},{"c":0,"d":"PIEZA GLUCO MAX - 60 TAB","i":"417","k":"417","l":"null","p":"$302.5","u":10,"v":302.5,"z":200},{"c":0,"d":"PIEZA GRIPA CAN  - 30 TAB","i":"480","k":"480","l":"null","p":"$278.3","u":10,"v":278.29998779296875,"z":200},{"c":0,"d":"PIEZA GRIPA CAN IM - 12 ML","i":"218","k":"218","l":"null","p":"$135.52","u":10,"v":135.52000427246094,"z":200},{"c":0,"d":"PIEZA GRIPA GALLO - 30 TAB","i":"219","k":"219","l":"null","p":"$278.3","u":10,"v":278.29998779296875,"z":200},{"c":0,"d":"PIEZA GRIPA PLUS - 25X20 G","i":"423","k":"423","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA HANOVER`S HAN SUPER B-150 INJECTION - 100 ML","i":"220","k":"220","l":"null","p":"$220","u":10,"v":220,"z":200},{"c":0,"d":"PIEZA HISTAMIN  - 250 ML","i":"222","k":"222","l":"null","p":"$486.42","u":10,"v":486.4200134277344,"z":200},{"c":0,"d":"PIEZA HISTAMIN - 100 ML","i":"221","k":"221","l":"null","p":"$243.21","u":10,"v":243.2100067138672,"z":200},{"c":0,"d":"PIEZA HORSIL - 100 ML","i":"606","k":"606","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IMPLANT ADE PLUS + B - 500 ML","i":"149","k":"149","l":"null","p":"$1,020","u":10,"v":1020,"z":200},{"c":0,"d":"PIEZA IMPLANT ALFA - 250 ML","i":"223","k":"223","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IMPLANT BETA - 250 ML","i":"224","k":"224","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE  PUPPY - 5 ML","i":"232","k":"232","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE - 100 ML","i":"229","k":"229","l":"null","p":"$189.75","u":10,"v":189.75,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE - 25 ML","i":"228","k":"228","l":"null","p":"$82.5","u":10,"v":82.5,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE - 250 ML","i":"230","k":"230","l":"null","p":"$330","u":10,"v":330,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE - 500 ML","i":"231","k":"231","l":"null","p":"$649","u":10,"v":649,"z":200},{"c":0,"d":"PIEZA INMUNO FORTE GALLO  - 5 ML","i":"233","k":"233","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA INVERMEX - 10 ML","i":"477","k":"477","l":"null","p":"$57.2","u":10,"v":57.20000076293945,"z":200},{"c":0,"d":"PIEZA INVERMEX - 100 ML","i":"235","k":"235","l":"null","p":"$233.42","u":10,"v":233.4199981689453,"z":200},{"c":0,"d":"PIEZA INVERMEX - 25 ML","i":"234","k":"234","l":"null","p":"$85.04","u":10,"v":85.04100036621094,"z":200},{"c":0,"d":"PIEZA INVERMEX - 250 ML","i":"236","k":"236","l":"null","p":"$466.84","u":10,"v":466.8399963378906,"z":200},{"c":0,"d":"PIEZA INVERMEX - 50 ML","i":"456","k":"456","l":"null","p":"$118.8","u":10,"v":118.80000305175781,"z":200},{"c":0,"d":"PIEZA INVERMEX - 500 ML","i":"237","k":"237","l":"null","p":"$745.7","u":10,"v":745.7009887695312,"z":200},{"c":0,"d":"PIEZA INVERMEX 3 5 % GOLD - 100 ML","i":"238","k":"238","l":"null","p":"$674.98","u":10,"v":674.9819946289062,"z":200},{"c":0,"d":"PIEZA INVERMEX 3 5 % GOLD - 250 ML","i":"239","k":"239","l":"null","p":"$1,350.39","u":10,"v":1350.3929443359375,"z":200},{"c":0,"d":"PIEZA INVERMEX 3 5 % GOLD - 50 ML","i":"571","k":"571","l":"null","p":"$338","u":10,"v":338,"z":200},{"c":0,"d":"PIEZA INVERMEX 3 5 % GOLD - 500 ML","i":"240","k":"240","l":"null","p":"$2,357.06","u":10,"v":2357.05810546875,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE  - 100 ML","i":"242","k":"242","l":"null","p":"$450.39","u":10,"v":450.3949890136719,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE  - 25 ML","i":"241","k":"241","l":"null","p":"$177.42","u":10,"v":177.41900634765625,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE  - 250 ML","i":"243","k":"243","l":"null","p":"$900.79","u":10,"v":900.7899780273438,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE  - 50 ML","i":"457","k":"457","l":"null","p":"$125","u":10,"v":125,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE  - 500 ML","i":"244","k":"244","l":"null","p":"$1,441.25","u":10,"v":1441.2530517578125,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE - 10 ML","i":"476","k":"476","l":"null","p":"$100","u":10,"v":100,"z":200},{"c":0,"d":"PIEZA INVERMEX ADE PASTA - 30 ML","i":"245","k":"245","l":"null","p":"$216.19","u":10,"v":216.19400024414062,"z":200},{"c":0,"d":"PIEZA INVERMEX B12 - 100 ML","i":"247","k":"247","l":"null","p":"$333.68","u":10,"v":333.68499755859375,"z":200},{"c":0,"d":"PIEZA INVERMEX B12 - 25 ML","i":"246","k":"246","l":"null","p":"$116.28","u":10,"v":116.28099822998047,"z":200},{"c":0,"d":"PIEZA INVERMEX B12 - 250 ML","i":"248","k":"248","l":"null","p":"$667.36","u":10,"v":667.3590087890625,"z":200},{"c":0,"d":"PIEZA INVERMEX B12 - 50 ML","i":"428","k":"428","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA INVERMEX B12 - 500 ML","i":"249","k":"249","l":"null","p":"$1,067.79","u":10,"v":1067.7919921875,"z":200},{"c":0,"d":"PIEZA INVERMEX F (PR) FORTE - 100 ML","i":"395","k":"395","l":"null","p":"$473.22","u":10,"v":473.2200012207031,"z":200},{"c":0,"d":"PIEZA INVERMEX F (PR) FORTE - 25 ML","i":"508","k":"508","l":"null","p":"$144.73","u":10,"v":144.7270050048828,"z":200},{"c":0,"d":"PIEZA INVERMEX F (PR) FORTE - 250 ML","i":"509","k":"509","l":"null","p":"$1,015.93","u":10,"v":1015.927001953125,"z":200},{"c":0,"d":"PIEZA INVERMEX F (PR) FORTE - 500 ML","i":"510","k":"510","l":"null","p":"$1,684.65","u":10,"v":1684.6500244140625,"z":200},{"c":0,"d":"PIEZA INVERMEX F - 100 ML","i":"251","k":"251","l":"null","p":"$684.6","u":10,"v":684.5960083007812,"z":200},{"c":0,"d":"PIEZA INVERMEX F - 25 ML","i":"250","k":"250","l":"null","p":"$228.21","u":10,"v":228.20599365234375,"z":200},{"c":0,"d":"PIEZA INVERMEX F - 250 ML","i":"252","k":"252","l":"null","p":"$1,369.2","u":10,"v":1369.2030029296875,"z":200},{"c":0,"d":"PIEZA INVERMEX F - 500 ML","i":"253","k":"253","l":"null","p":"$2,289.64","u":10,"v":2289.638916015625,"z":200},{"c":0,"d":"PIEZA INVERMEX F PEQUEÑOS RUMINANTES - 100 ML","i":"255","k":"255","l":"null","p":"$307.63","u":10,"v":307.6260070800781,"z":200},{"c":0,"d":"PIEZA INVERMEX F PEQUEÑOS RUMINANTES - 25 ML","i":"254","k":"254","l":"null","p":"$102.73","u":10,"v":102.72899627685547,"z":200},{"c":0,"d":"PIEZA INVERMEX F PEQUEÑOS RUMINANTES - 250 ML","i":"256","k":"256","l":"null","p":"$666.51","u":10,"v":666.5120239257812,"z":200},{"c":0,"d":"PIEZA INVERMEX F PEQUEÑOS RUMINANTES - 500 ML","i":"257","k":"257","l":"null","p":"$1,066.43","u":10,"v":1066.427978515625,"z":200},{"c":0,"d":"PIEZA INVERMEX PREMIX - 1 KG","i":"435","k":"435","l":"null","p":"$1,320","u":10,"v":1320,"z":200},{"c":0,"d":"PIEZA INVERMEX PREMIX - 10 KG","i":"522","k":"522","l":"null","p":"$5,313","u":10,"v":5313,"z":200},{"c":0,"d":"PIEZA INVERMEX PREMIX - 25X20 G","i":"258","k":"258","l":"null","p":"$861.63","u":10,"v":861.6300048828125,"z":200},{"c":0,"d":"PIEZA INVERSOL 1 % GALLO - 12X30 ML","i":"260","k":"260","l":"null","p":"$640.88","u":10,"v":640.8820190429688,"z":200},{"c":0,"d":"PIEZA INVERSOL 1 % PAJARO - 12X30 ML","i":"259","k":"259","l":"null","p":"$640.88","u":10,"v":640.8820190429688,"z":200},{"c":0,"d":"PIEZA INVERSOL 1 % PUPPY - 12X30 ML","i":"261","k":"261","l":"null","p":"$640.88","u":10,"v":640.8820190429688,"z":200},{"c":0,"d":"PIEZA INVERSOL 1% GALLO - 1 LT","i":"433","k":"433","l":"null","p":"$1,848","u":10,"v":1848,"z":200},{"c":0,"d":"PIEZA INVERSOL ADE PASTA - 12 ML","i":"262","k":"262","l":"null","p":"$126.5","u":10,"v":126.5,"z":200},{"c":0,"d":"PIEZA INVERSOL ADE PASTA FORTE - 12 ML","i":"263","k":"263","l":"null","p":"$149.6","u":10,"v":149.60000610351562,"z":200},{"c":0,"d":"PIEZA IVER CLOSAN - 100 ML","i":"498","k":"498","l":"null","p":"$707.3","u":10,"v":707.2999877929688,"z":200},{"c":0,"d":"PIEZA IVER CLOSAN - 250 ML","i":"264","k":"264","l":"null","p":"$1,346.49","u":10,"v":1346.488037109375,"z":200},{"c":0,"d":"PIEZA IVER CLOSAN - 50 ML","i":"496","k":"496","l":"null","p":"$432.3","u":10,"v":432.29998779296875,"z":200},{"c":0,"d":"PIEZA IVER GOLD MASTER - 100 ML","i":"265","k":"265","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVER GOLD MASTER - 250 ML","i":"266","k":"266","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVER GOLD MAX - 100 ML","i":"267","k":"267","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVER GOLD MAX - 250 ML","i":"268","k":"268","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVERCIBOL FORTE  - 100 ML","i":"269","k":"269","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVERCIBOL FORTE  - 250 ML","i":"270","k":"270","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA IVERVET 3.5 GOLD - 500 ML","i":"488","k":"488","l":"null","p":"$2,359.5","u":10,"v":2359.5,"z":200},{"c":0,"d":"PIEZA IVERVETT FORTE 5X5 - 500 ML","i":"384","k":"384","l":"null","p":"$2,681.8","u":10,"v":2681.800048828125,"z":200},{"c":0,"d":"PIEZA JABON ASUNTOL - 100 G","i":"1001","k":"1001","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA JABON VETRIDERM - 100 G","i":"1003","k":"1003","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA KETOCORODOL IM - 100 ML","i":"271","k":"271","l":"null","p":"$491.35","u":10,"v":491.3479919433594,"z":200},{"c":0,"d":"PIEZA LAMICIL 100\/FORTE - 10 ML","i":"272","k":"272","l":"null","p":"$35.74","u":10,"v":35.73899841308594,"z":200},{"c":0,"d":"PIEZA LAMICIL 100\/FORTE - 100 ML","i":"274","k":"274","l":"null","p":"$160.09","u":10,"v":160.093994140625,"z":200},{"c":0,"d":"PIEZA LAMICIL 100\/FORTE - 20 ML","i":"273","k":"273","l":"null","p":"$59.55","u":10,"v":59.55400085449219,"z":200},{"c":0,"d":"PIEZA LAMICIL 100\/FORTE - 250 ML","i":"275","k":"275","l":"null","p":"$320.19","u":10,"v":320.18798828125,"z":200},{"c":0,"d":"PIEZA LAMICIL 100\/FORTE - 500 ML","i":"276","k":"276","l":"null","p":"$491.35","u":10,"v":491.3479919433594,"z":200},{"c":0,"d":"PIEZA LAMICIL 200\/LA - 100 ML","i":"424","k":"424","l":"null","p":"$262.9","u":10,"v":262.8999938964844,"z":200},{"c":0,"d":"PIEZA LAMICIL 200\/LA - 20 ML","i":"575","k":"575","l":"null","p":"$80","u":10,"v":80,"z":200},{"c":0,"d":"PIEZA LAMICIL 200\/LA - 250 ML","i":"468","k":"468","l":"null","p":"$473","u":10,"v":473,"z":200},{"c":0,"d":"PIEZA LAMICIL 200\/LA - 500 ML","i":"406","k":"406","l":"null","p":"$771.1","u":10,"v":771.0999755859375,"z":200},{"c":0,"d":"PIEZA LAMICIL 50\/LIQUIDA - 100 ML","i":"421","k":"421","l":"null","p":"$155.1","u":10,"v":155.10000610351562,"z":200},{"c":0,"d":"PIEZA LARVASEN  - 500 ML","i":"601","k":"601","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA LINCO FLOR - 100 ML","i":"277","k":"277","l":"null","p":"$332.07","u":10,"v":332.0679931640625,"z":200},{"c":0,"d":"PIEZA LINCO FLOR - 20 ML","i":"466","k":"466","l":"null","p":"$143","u":10,"v":143,"z":200},{"c":0,"d":"PIEZA LINCO FLOR - 250 ML","i":"278","k":"278","l":"null","p":"$750.75","u":10,"v":750.75,"z":200},{"c":0,"d":"PIEZA LINCO FLOR - 50 ML","i":"404","k":"404","l":"null","p":"$196.9","u":10,"v":196.89999389648438,"z":200},{"c":0,"d":"PIEZA LINEFRONVET - 250 ML","i":"440","k":"440","l":"null","p":"$385","u":10,"v":385,"z":200},{"c":0,"d":"PIEZA LIPKAM GEL - 150 G","i":"577","k":"577","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA MAMI BIO  - 240 G","i":"281","k":"281","l":"null","p":"$157.22","u":10,"v":157.22300720214844,"z":200},{"c":0,"d":"PIEZA MAMI BIO - 150 G","i":"280","k":"280","l":"null","p":"$128.43","u":10,"v":128.4250030517578,"z":200},{"c":0,"d":"PIEZA MAMI BIO - 60 G","i":"279","k":"279","l":"null","p":"$61.05","u":10,"v":61.04999923706055,"z":200},{"c":0,"d":"PIEZA MASTER ATP PLUS - 500 ML","i":"449","k":"449","l":"null","p":"$1,980","u":10,"v":1980,"z":200},{"c":0,"d":"PIEZA MASTI BIO FORTE - 12X10 ML","i":"282","k":"282","l":"null","p":"$640.88","u":10,"v":640.8820190429688,"z":200},{"c":0,"d":"PIEZA MELOCAM - 10 ML","i":"401","k":"401","l":"null","p":"$88","u":10,"v":88,"z":200},{"c":0,"d":"PIEZA MELOCAM - 100 ML","i":"284","k":"284","l":"null","p":"$432.38","u":10,"v":432.37701416015625,"z":200},{"c":0,"d":"PIEZA MELOCAM - 20 ML","i":"283","k":"283","l":"null","p":"$150.68","u":10,"v":150.67799377441406,"z":200},{"c":0,"d":"PIEZA MELOCAM - 250 ML","i":"285","k":"285","l":"null","p":"$864.75","u":10,"v":864.7540283203125,"z":200},{"c":0,"d":"PIEZA MELOXICAN CHICOS - 20 TAB","i":"286","k":"286","l":"null","p":"$133.87","u":10,"v":133.8699951171875,"z":200},{"c":0,"d":"PIEZA MELOXICAN GRANDES - 20 TAB","i":"527","k":"527","l":"null","p":"$187","u":10,"v":187,"z":200},{"c":0,"d":"PIEZA MELOXICAN MEDIANOS - 20 TAB","i":"526","k":"526","l":"null","p":"$159.5","u":10,"v":159.5,"z":200},{"c":0,"d":"PIEZA METABIO LAC - 500 ML","i":"386","k":"386","l":"null","p":"$372.23","u":10,"v":372.22900390625,"z":200},{"c":0,"d":"PIEZA MOSKAZOL  - 5 LT","i":"596","k":"596","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA MOSKAZOL - 1 LT","i":"287","k":"287","l":"null","p":"$409.45","u":10,"v":409.4530029296875,"z":200},{"c":0,"d":"PIEZA MOSKAZOL GALLO - 120 ML","i":"288","k":"288","l":"null","p":"$139.96","u":10,"v":139.96400451660156,"z":200},{"c":0,"d":"PIEZA MOSKAZOL PUPPY - 120 ML","i":"289","k":"289","l":"null","p":"$139.96","u":10,"v":139.96400451660156,"z":200},{"c":0,"d":"PIEZA MOXILAN TRIVALENTE - 100 ML","i":"483","k":"483","l":"null","p":"$328.9","u":10,"v":328.8999938964844,"z":200},{"c":0,"d":"PIEZA MUCOTRYL 100 IM - 10 ML","i":"290","k":"290","l":"null","p":"$77.68","u":10,"v":77.68199920654297,"z":200},{"c":0,"d":"PIEZA MUCOTRYL 100 IM - 100 ML","i":"291","k":"291","l":"null","p":"$341.8","u":10,"v":341.8030090332031,"z":200},{"c":0,"d":"PIEZA MUCOTRYL 100 IM - 250 ML","i":"292","k":"292","l":"null","p":"$714.67","u":10,"v":714.6699829101562,"z":200},{"c":0,"d":"PIEZA MUCOTRYL 100 ORAL - 100 ML","i":"293","k":"293","l":"null","p":"$169.4","u":10,"v":169.39999389648438,"z":200},{"c":0,"d":"PIEZA NANDRO BOLD PLUS  - 100 ML","i":"400","k":"400","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NANDRO BOLD PLUS  - 250 ML","i":"294","k":"294","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NANDROLON - 20 ML","i":"295","k":"295","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NANDROLON 300 LA - 100 ML","i":"534","k":"534","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NANDROLON 300 LA - 250 ML","i":"296","k":"296","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NEUFLOR FORTE - 100 ML","i":"589","k":"589","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NEUFLOR FORTE - 250 ML","i":"590","k":"590","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NEUMO CAN - 30 TAB","i":"543","k":"543","l":"null","p":"$278.3","u":10,"v":278.29998779296875,"z":200},{"c":0,"d":"PIEZA NEUMO ESPECTOL - 1 KG","i":"422","k":"422","l":"null","p":"$1,078","u":10,"v":1078,"z":200},{"c":0,"d":"PIEZA NEUMO ESPECTOL - 10 KG","i":"473","k":"473","l":"null","p":"$5,280","u":10,"v":5280,"z":200},{"c":0,"d":"PIEZA NEUMO ESPECTOL - 100 GRS","i":"471","k":"471","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA NEUMO ESPECTOL - 25X20 G","i":"297","k":"297","l":"null","p":"$704.97","u":10,"v":704.968017578125,"z":200},{"c":0,"d":"PIEZA NEUMOSOL CANINO - 100 ML","i":"481","k":"481","l":"null","p":"$277.2","u":10,"v":277.20001220703125,"z":200},{"c":0,"d":"PIEZA OMEGA CAN - 100 ML","i":"298","k":"298","l":"null","p":"$228.4","u":10,"v":228.4040069580078,"z":200},{"c":0,"d":"PIEZA OPTIZAN - 15 ML","i":"299","k":"299","l":"null","p":"$113.94","u":10,"v":113.93800354003906,"z":200},{"c":0,"d":"PIEZA OXANDRO FRATO - 100 TAB","i":"300","k":"300","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA OXIME-FRATO - 100 TAB","i":"581","k":"581","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA OXIMETA VET  - 100 TAB","i":"301","k":"301","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA OXITETRACLOR ANTIDIARREICO - 12X30 ML","i":"302","k":"302","l":"null","p":"$512.28","u":10,"v":512.281005859375,"z":200},{"c":0,"d":"PIEZA OXITETRACLOR ANTIDIARREICO PAJARO - 12X30 ML","i":"303","k":"303","l":"null","p":"$512.28","u":10,"v":512.281005859375,"z":200},{"c":0,"d":"PIEZA OXITIAMUTIL CON EXPECTORANTE - 10 KG","i":"600","k":"600","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA OXITINA COMPLEJO FORTE - 100 ML","i":"494","k":"494","l":"null","p":"$302.5","u":10,"v":302.5,"z":200},{"c":0,"d":"PIEZA OXITINA COMPLEJO FORTE - 250 ML","i":"426","k":"426","l":"null","p":"$500.5","u":10,"v":500.5,"z":200},{"c":0,"d":"PIEZA PENISTREPTO - 50 MILL","i":"304","k":"304","l":"null","p":"$783.3","u":10,"v":783.2990112304688,"z":200},{"c":0,"d":"PIEZA PEROXICAN - 100 ML","i":"414","k":"414","l":"null","p":"$372.23","u":10,"v":372.22900390625,"z":200},{"c":0,"d":"PIEZA PIROXIDEX 8% - 100 ML","i":"305","k":"305","l":"null","p":"$372.23","u":10,"v":372.22900390625,"z":200},{"c":0,"d":"PIEZA PIROXIDEX 8% - 250 ML","i":"306","k":"306","l":"null","p":"$786.5","u":10,"v":786.5,"z":200},{"c":0,"d":"PIEZA POWER FORCE B12\/5  500 - 100 ML","i":"308","k":"308","l":"null","p":"$669.86","u":10,"v":669.8560180664062,"z":200},{"c":0,"d":"PIEZA POWER FORCE B12\/5  500 - 20 ML","i":"307","k":"307","l":"null","p":"$257.14","u":10,"v":257.135986328125,"z":200},{"c":0,"d":"PIEZA POWER FORCE B12\/5  500 - 250 ML","i":"309","k":"309","l":"null","p":"$1,339.71","u":10,"v":1339.7120361328125,"z":200},{"c":0,"d":"PIEZA POWER TREM - 100 ML","i":"462","k":"462","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA POWER TREM - 20 ML","i":"310","k":"310","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA POWER TREM - 250 ML","i":"586","k":"586","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA PROMETABOL - 250 ML","i":"602","k":"602","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA PULGA SARNA - 100 ML","i":"407","k":"407","l":"null","p":"$253","u":10,"v":253,"z":200},{"c":0,"d":"PIEZA PUPPY LAX - 12 ML","i":"311","k":"311","l":"null","p":"$122.87","u":10,"v":122.87000274658203,"z":200},{"c":0,"d":"PIEZA RADIX CIANOCOBALAMIN VTAMINA B12 - 10 ML","i":"493","k":"493","l":"null","p":"$97.76","u":10,"v":97.75700378417969,"z":200},{"c":0,"d":"PIEZA RADIX CIANOCOBALAMIN VTAMINA B12 - 100 ML","i":"312","k":"312","l":"null","p":"$595.56","u":10,"v":595.56201171875,"z":200},{"c":0,"d":"PIEZA RANITIN - 30 TAB","i":"313","k":"313","l":"null","p":"$119.11","u":10,"v":119.10800170898438,"z":200},{"c":0,"d":"PIEZA RAPTOR  - 250 ML","i":"562","k":"562","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA RAPTOR PLUS - 250 ML","i":"563","k":"563","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA RAPTOR V PLUS - 20 ML","i":"572","k":"572","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA ROOSTER 6 000 - 20 ML","i":"314","k":"314","l":"null","p":"$146.41","u":10,"v":146.41000366210938,"z":200},{"c":0,"d":"PIEZA ROOSTER BOOSTER COMPLEX B  - 10 ML","i":"578","k":"578","l":"null","p":"$198","u":10,"v":198,"z":200},{"c":0,"d":"PIEZA RUME-BIO PLUS - 25X15 G","i":"530","k":"530","l":"null","p":"$723.8","u":10,"v":723.7999877929688,"z":200},{"c":0,"d":"PIEZA SANGRE DE CAMPEON - 100 ML","i":"515","k":"515","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SANGRE DE CAMPEON CABALLO - 100 ML","i":"545","k":"545","l":"null","p":"$900","u":10,"v":900,"z":200},{"c":0,"d":"PIEZA SANGRE DE CAMPEON PERRO - 100 ML","i":"546","k":"546","l":"null","p":"$900","u":10,"v":900,"z":200},{"c":0,"d":"PIEZA SANGRE DE TIGRE - 50 ML","i":"439","k":"439","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SCAR BIO - 120 ML","i":"551","k":"551","l":"null","p":"$346.5","u":10,"v":346.5,"z":200},{"c":0,"d":"PIEZA SCAR BIO - 150 G","i":"552","k":"552","l":"null","p":"$341","u":10,"v":341,"z":200},{"c":0,"d":"PIEZA SCAR-V ULTRA - 100 ML","i":"1008","k":"1008","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SCAR-VP - 100 ML","i":"1009","k":"1009","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SECABIO FORTE - 12X10 ML","i":"387","k":"387","l":"null","p":"$665.5","u":10,"v":665.5,"z":200},{"c":0,"d":"PIEZA SERUM ENERGY COMPLEMENTO VITAMINICO ATP - 500 ML","i":"591","k":"591","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SHAMPOO - 1 LT","i":"315","k":"315","l":"null","p":"$327.56","u":10,"v":327.5580139160156,"z":200},{"c":0,"d":"PIEZA SHAMPOO ANTIPULGAS - 500 ML","i":"1005","k":"1005","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA STANO EQUINE MAX GEL - 30 G","i":"416","k":"416","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA STANO VET 50 MG - 250 ML","i":"533","k":"533","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SUERO GLUCOSADO DX - 500 ML","i":"316","k":"316","l":"null","p":"$119.11","u":10,"v":119.10800170898438,"z":200},{"c":0,"d":"PIEZA SUERO SALINO FISIOLOGICO - 500 ML","i":"317","k":"317","l":"null","p":"$98.26","u":10,"v":98.26300048828125,"z":200},{"c":0,"d":"PIEZA SUERO SALINO PROTEICO - 500 ML","i":"402","k":"402","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SULFA 200 - 500 ML","i":"467","k":"467","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA SUPER VITAMINA B12 5 500 + B15  - 100 ML","i":"567","k":"567","l":"null","p":"$630","u":10,"v":630,"z":200},{"c":0,"d":"PIEZA TALCO BOLFO - 100 G","i":"1002","k":"1002","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TESTO TETRA - 20 ML","i":"318","k":"318","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TESTOSTERONA - 100 ML","i":"320","k":"320","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TESTOSTERONA - 100 TAB","i":"431","k":"431","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TESTOSTERONA - 20 ML","i":"319","k":"319","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TESTOSTERONA - 250 ML","i":"603","k":"603","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TONICO 5500 ADE + COMPLEJO B - 15 ML","i":"321","k":"321","l":"null","p":"$125.33","u":10,"v":125.33399963378906,"z":200},{"c":0,"d":"PIEZA TONICO CAMBIO PLUMA GALLO - 12X30 ML","i":"323","k":"323","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO CAMBIO PLUMA PAJARO - 12X30 ML","i":"322","k":"322","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO CANTO PAJARO - 12X30 ML","i":"324","k":"324","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO EXPECTORANTE GALLO - 12X30 ML","i":"511","k":"511","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO EXPECTORANTE PAJARO - 12X30 ML","i":"325","k":"325","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO PARLOTEAR COTORROS - 12X30 ML","i":"326","k":"326","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO PELEA GALLO - 12X30 ML","i":"327","k":"327","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO POSTURA GALLO - 12X30 ML","i":"329","k":"329","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO POSTURA PAJARO - 12X30 ML","i":"328","k":"328","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO VIT CON GALLO - 12X30 ML","i":"330","k":"330","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TONICO VIT CON PAJARO - 12X30 ML","i":"385","k":"385","l":"null","p":"$541.19","u":10,"v":541.1890258789062,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % - 100 ML","i":"331","k":"331","l":"null","p":"$136.72","u":10,"v":136.718994140625,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % - 250 ML","i":"332","k":"332","l":"null","p":"$273.44","u":10,"v":273.43798828125,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % - 500 ML","i":"333","k":"333","l":"null","p":"$437.5","u":10,"v":437.50299072265625,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % FORTIFICADA - 100 ML","i":"334","k":"334","l":"null","p":"$160.5","u":10,"v":160.50100708007812,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % FORTIFICADA - 250 ML","i":"335","k":"335","l":"null","p":"$321.01","u":10,"v":321.01300048828125,"z":200},{"c":0,"d":"PIEZA TRESULFAS 20 % FORTIFICADA - 500 ML","i":"336","k":"336","l":"null","p":"$514.4","u":10,"v":514.4039916992188,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL - 12 MILL","i":"338","k":"338","l":"null","p":"$288.24","u":10,"v":288.2439880371094,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL - 4 MILL","i":"537","k":"537","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL - 50 MILL","i":"339","k":"339","l":"null","p":"$858","u":10,"v":858,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL - 6 MILL","i":"337","k":"337","l":"null","p":"$150.68","u":10,"v":150.67799377441406,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL AVIAR 1 MILL - 50 ML","i":"518","k":"518","l":"null","p":"$187","u":10,"v":187,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL AVIAR 1\/2 MILL - 25 ML","i":"341","k":"341","l":"null","p":"$94","u":10,"v":93.99500274658203,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL AVIAR 2 MILL - 100 ML","i":"519","k":"519","l":"null","p":"$330","u":10,"v":330,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL PUPPY - 1 MILL","i":"490","k":"490","l":"null","p":"$129.62","u":10,"v":129.62399291992188,"z":200},{"c":0,"d":"PIEZA TRIBENZATIL PUPPY - 1\/2 MILL","i":"340","k":"340","l":"null","p":"$85.16","u":10,"v":85.16200256347656,"z":200},{"c":0,"d":"PIEZA TRICLOXIL ORAL - 1 LT","i":"593","k":"593","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA TURBONAY B12 - 80 ML","i":"544","k":"544","l":"null","p":"$346.5","u":10,"v":346.5,"z":200},{"c":0,"d":"PIEZA TYLMICO 400 FLOR - 100 ML","i":"342","k":"342","l":"null","p":"$895.4","u":10,"v":895.4000244140625,"z":200},{"c":0,"d":"PIEZA TYLMICO 400 FLOR - 250 ML","i":"343","k":"343","l":"null","p":"$1,790.8","u":10,"v":1790.800048828125,"z":200},{"c":0,"d":"PIEZA TYLOBIO 200 - 100 ML","i":"345","k":"345","l":"null","p":"$273.97","u":10,"v":273.96600341796875,"z":200},{"c":0,"d":"PIEZA TYLOBIO 200 - 20 ML","i":"344","k":"344","l":"null","p":"$113.94","u":10,"v":113.93800354003906,"z":200},{"c":0,"d":"PIEZA TYLOBIO 200 - 250 ML","i":"346","k":"346","l":"null","p":"$547.92","u":10,"v":547.9210205078125,"z":200},{"c":0,"d":"PIEZA TYLOBIO 200 - 500 ML","i":"504","k":"504","l":"null","p":"$1,089","u":10,"v":1089,"z":200},{"c":0,"d":"PIEZA UBRE MASTIL - 500 ML","i":"478","k":"478","l":"null","p":"$528","u":10,"v":528,"z":200},{"c":0,"d":"PIEZA UBRETOL - 150 G","i":"418","k":"418","l":"null","p":"$122.1","u":10,"v":122.0999984741211,"z":200},{"c":0,"d":"PIEZA UBRETOL - 240 G","i":"419","k":"419","l":"null","p":"$150.9","u":10,"v":150.8979949951172,"z":200},{"c":0,"d":"PIEZA ULTRA HORSE F40 - 20 ML","i":"599","k":"599","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VENTIPULMIN SYRUP - 330 ML","i":"605","k":"605","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VERMI FACIOL RUMIANTES - 1 LT","i":"597","k":"597","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VERMI FACIOL RUMIANTES - 100 ML","i":"410","k":"410","l":"null","p":"$582.63","u":10,"v":582.6259765625,"z":200},{"c":0,"d":"PIEZA VERMI FACIOL RUMIANTES - 250 ML","i":"412","k":"412","l":"null","p":"$1,165.23","u":10,"v":1165.22998046875,"z":200},{"c":0,"d":"PIEZA VERMI FORTE - 100 ML","i":"347","k":"347","l":"null","p":"$123.76","u":10,"v":123.76100158691406,"z":200},{"c":0,"d":"PIEZA VERRUKILLER - 50 ML","i":"427","k":"427","l":"null","p":"$189.75","u":10,"v":189.75,"z":200},{"c":0,"d":"PIEZA VETRIDERM OTTO - 100 G","i":"1004","k":"1004","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VIROTOL FORTE GALLO - 100 TAB","i":"348","k":"348","l":"null","p":"$309.55","u":10,"v":309.5509948730469,"z":200},{"c":0,"d":"PIEZA VIROTOL FORTE PUPPY - 100 TAB","i":"349","k":"349","l":"null","p":"$309.55","u":10,"v":309.5509948730469,"z":200},{"c":0,"d":"PIEZA VIT ADE - 500 ML","i":"350","k":"350","l":"null","p":"$871.02","u":10,"v":871.0239868164062,"z":200},{"c":0,"d":"PIEZA VIT-E + B12 + FOSE - 500 ML","i":"564","k":"564","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VIT-E SELENIO - 250 ML","i":"560","k":"560","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VIT-E SELENIO - 500 ML","i":"555","k":"555","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITACOM B - 100 ML","i":"352","k":"352","l":"null","p":"$150.68","u":10,"v":150.67799377441406,"z":200},{"c":0,"d":"PIEZA VITACOM B - 20 ML","i":"351","k":"351","l":"null","p":"$56.58","u":10,"v":56.58399963378906,"z":200},{"c":0,"d":"PIEZA VITACOM B - 250 ML","i":"353","k":"353","l":"null","p":"$288.24","u":10,"v":288.2439880371094,"z":200},{"c":0,"d":"PIEZA VITACOM B - 500 ML","i":"354","k":"354","l":"null","p":"$481.51","u":10,"v":481.5140075683594,"z":200},{"c":0,"d":"PIEZA VITACOMPLEX - 100 ML","i":"355","k":"355","l":"null","p":"$167.38","u":10,"v":167.37600708007812,"z":200},{"c":0,"d":"PIEZA VITACOMPLEX - 250 ML","i":"356","k":"356","l":"null","p":"$320.19","u":10,"v":320.18798828125,"z":200},{"c":0,"d":"PIEZA VITACOMPLEX - 500 ML","i":"357","k":"357","l":"null","p":"$510.99","u":10,"v":510.9939880371094,"z":200},{"c":0,"d":"PIEZA VITAE + SELENIO - 100 ML","i":"358","k":"358","l":"null","p":"$308.63","u":10,"v":308.62701416015625,"z":200},{"c":0,"d":"PIEZA VITAE + SELENIO - 20 ML","i":"542","k":"542","l":"null","p":"$126.5","u":10,"v":126.5,"z":200},{"c":0,"d":"PIEZA VITAE + SELENIO - 250 ML","i":"359","k":"359","l":"null","p":"$617.23","u":10,"v":617.2319946289062,"z":200},{"c":0,"d":"PIEZA VITAE + SELENIO - 500 ML","i":"360","k":"360","l":"null","p":"$987.58","u":10,"v":987.5800170898438,"z":200},{"c":0,"d":"PIEZA VITAMIN B COMPLEX - 100 ML","i":"361","k":"361","l":"null","p":"$199.39","u":10,"v":199.38600158691406,"z":200},{"c":0,"d":"PIEZA VITAMIN B COMPLEX - 20 ML","i":"501","k":"501","l":"null","p":"$60.5","u":10,"v":60.5,"z":200},{"c":0,"d":"PIEZA VITAMIN B COMPLEX - 250 ML","i":"362","k":"362","l":"null","p":"$398.77","u":10,"v":398.7720031738281,"z":200},{"c":0,"d":"PIEZA VITAMIN B COMPLEX - 500 ML","i":"594","k":"594","l":"null","p":"$740","u":10,"v":740,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE + COMPLEJO B - 100 ML","i":"367","k":"367","l":"null","p":"$327.1","u":10,"v":327.09600830078125,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE + COMPLEJO B - 250 ML","i":"368","k":"368","l":"null","p":"$654.21","u":10,"v":654.2139892578125,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE + COMPLEJO B - 50 ML","i":"452","k":"452","l":"null","p":"$167.2","u":10,"v":167.1999969482422,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE + COMPLEJO B - 500 ML","i":"369","k":"369","l":"null","p":"$1,045.22","u":10,"v":1045.219970703125,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE - 100 ML","i":"364","k":"364","l":"null","p":"$272.59","u":10,"v":272.59100341796875,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE - 20 ML","i":"363","k":"363","l":"null","p":"$95","u":10,"v":94.99600219726562,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE - 250 ML","i":"365","k":"365","l":"null","p":"$545.18","u":10,"v":545.1820068359375,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE - 50 ML","i":"502","k":"502","l":"null","p":"$140","u":10,"v":140,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE - 500 ML","i":"366","k":"366","l":"null","p":"$871.02","u":10,"v":871.0239868164062,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE PLATINUM - 500 ML","i":"595","k":"595","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE PLUS - 100 ML","i":"491","k":"491","l":"null","p":"$297","u":10,"v":297,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE PLUS - 250 ML","i":"506","k":"506","l":"null","p":"$594","u":10,"v":594,"z":200},{"c":0,"d":"PIEZA VITAMINA ADE PLUS - 500 ML","i":"470","k":"470","l":"null","p":"$902","u":10,"v":902,"z":200},{"c":0,"d":"PIEZA VITAMINA AZUL Γ - 250 ML","i":"227","k":"227","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA E + SELENIO  - 250 ML","i":"225","k":"225","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA K - 100 ML","i":"370","k":"370","l":"null","p":"$356.05","u":10,"v":356.0480041503906,"z":200},{"c":0,"d":"PIEZA VITAMINA K - 20 ML","i":"554","k":"554","l":"null","p":"$94.6","u":10,"v":94.5999984741211,"z":200},{"c":0,"d":"PIEZA VITAMINA MORADA Ω - 250 ML","i":"226","k":"226","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA MORADA Ω GOLD - 250 ML","i":"500","k":"500","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA - 100 ML","i":"372","k":"372","l":"null","p":"$207.18","u":10,"v":207.18499755859375,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA - 20 ML","i":"371","k":"371","l":"null","p":"$71.92","u":10,"v":71.91799926757812,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA - 250 ML","i":"373","k":"373","l":"null","p":"$414.36","u":10,"v":414.3590087890625,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA - 500 ML","i":"374","k":"374","l":"null","p":"$662.97","u":10,"v":662.969970703125,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA PLATINUM DIAMOND - 100 ML","i":"570","k":"570","l":"570","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA PLATINUM DIAMOND - 250 ML","i":"576","k":"576","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA PROTEICA - 100 ML","i":"375","k":"375","l":"null","p":"$372.23","u":10,"v":372.22900390625,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA PROTEICA - 12X10 ML","i":"377","k":"377","l":"null","p":"$684.6","u":10,"v":684.5960083007812,"z":200},{"c":0,"d":"PIEZA VITAMINA NEGRA PROTEICA - 1X10 ML","i":"376","k":"376","l":"null","p":"$64.1","u":10,"v":64.09700012207031,"z":200},{"c":0,"d":"PIEZA VITAMINA ROJA Α PL - 100 ML","i":"499","k":"499","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA ROJA Α PL - 250 ML","i":"397","k":"397","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA ROSA BG - 250 ML","i":"448","k":"448","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINA VERDE Β T - 250 ML","i":"434","k":"434","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA VITAMINVIDA PUPPY - 12X30 ML","i":"579","k":"579","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA YATRINMUNE - 100 ML","i":"379","k":"379","l":"null","p":"$311.67","u":10,"v":311.67401123046875,"z":200},{"c":0,"d":"PIEZA YATRINMUNE - 25 ML","i":"378","k":"378","l":"null","p":"$113","u":10,"v":113.00299835205078,"z":200},{"c":0,"d":"PIEZA YATRINMUNE - 250 ML","i":"380","k":"380","l":"null","p":"$623.5","u":10,"v":623.5020141601562,"z":200},{"c":0,"d":"PIEZA YATRINMUNE - 50 ML","i":"405","k":"405","l":"null","p":"$0","u":10,"v":0,"z":200},{"c":0,"d":"PIEZA YATRINMUNE - 500 ML","i":"381","k":"381","l":"null","p":"$997.6","u":10,"v":997.6010131835938,"z":200},{"c":0,"d":"PIEZA YATRINMUNE CUIDA - 12 ML","i":"382","k":"382","l":"null","p":"$156.66","u":10,"v":156.66200256347656,"z":200},{"c":0,"d":"PIEZA YATRINMUNE GALLO - 50 ML","i":"383","k":"383","l":"null","p":"$206.79","u":10,"v":206.78900146484375,"z":200}],"ctg":[{"i":0,"n":"Todos"}],"und":[{"i":10,"n":"_"}],"ngc":"BIOFARMEX BODEGA","tel2":"5617524444","cor2":"","dir2":"","alf":"Alfabeto","myp":"Mayor Precio","mnp":"Menor Precio","ctgs":"Categoría","orp":"Ordenar Por","bsc":"Buscar","crt":true,"nam":"Nombre","sct":"Comprar Ahora","ernw":"Error al conectarse al servidor, compruebe su conexión a internet e intente nuevamente.","img":true,"uni":false,"cla":true,"wha":true,"clo":"Cerrar","nxt":"Siguiente","prv":"Anterior","sin":"Sin información","clt":"w3-deep-purple","tmp":1775768318253,"lg":"logo"} /*#d4t4#*/;
+		</script>
+    </body>
+</html>
